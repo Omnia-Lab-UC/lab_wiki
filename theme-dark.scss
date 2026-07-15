@@ -1,0 +1,38 @@
+/*-- scss:defaults --*/
+
+// Dark palette layered on the zephyr theme — keeps the same layout and
+// accent language as the light site, just inverted for comfortable dark
+// reading. Loaded after theme.scss so it only overrides colours.
+
+$body-bg:        #1a1d21;
+$body-color:     #cfd3d8;
+
+$link-color:     #6ea8fe;   // zephyr blue, lightened for dark backgrounds
+
+// Surfaces (sidebar, code blocks, cards) sit slightly above the body.
+$light:          #24282e;
+$dark:           #12151a;
+
+// Bootstrap greys, remapped so borders/muted text read on a dark bg.
+$gray-100: #2a2f36;
+$gray-200: #33383f;
+$gray-300: #3d434b;
+$gray-600: #9aa1ab;   // muted / secondary text
+$gray-700: #b6bcc4;
+$gray-800: #cfd3d8;
+
+$code-color:     #e685b5;   // inline code
+$border-color:   #333941;
+
+/*-- scss:rules --*/
+
+// Code blocks a touch darker than the body so they read as panels.
+div.sourceCode,
+pre {
+  background-color: $dark;
+}
+
+// Soften the harsh pure-white on headings.
+h1, h2, h3, h4, h5, h6 {
+  color: #e8eaed;
+}
