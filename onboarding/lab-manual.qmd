@@ -96,6 +96,22 @@ All expectations under [Everyone](#everyone), plus:
 - Guide lab members in preparing for their next career step (graduate school,
   postdoc, faculty positions, industry, etc.).
 
+### Research assistants
+
+All expectations under [Everyone](#everyone), plus:
+
+- Carry out your main project. While much of this work is independent,
+  collaboration is vital, and lab members are available to support you.
+- Provide support and collaboration to other lab members, contributing your
+  skills to shared analyses, pipelines, and problem-solving.
+- Present research at intramural events, external labs, and conferences.
+- Help mentor undergraduate students.
+- Contribute to the lab's shared resources — code, documentation, and this wiki
+  — so that knowledge is preserved and easy for others to build on.
+- Meet deadlines and communicate them clearly to Tomás.
+- Plan for your career path (graduate school, industry, or other fields), and
+  talk with Tomás about the next step you're working toward.
+
 ### Graduate students
 
 All expectations under [Everyone](#everyone), plus:
