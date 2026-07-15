@@ -1,0 +1,13 @@
+---
+title: "Protocols"
+description: "Step-by-step experimental and analysis protocols."
+listing:
+  contents: .
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+Reusable protocols for lab and computational work. Each protocol is one page, written so that someone can follow it without asking the author.

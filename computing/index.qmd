@@ -1,0 +1,13 @@
+---
+title: "Computing"
+description: "Servers, HPC, software environments, and tooling."
+listing:
+  contents: .
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+How to access and use the lab's computing resources: servers, cluster access, software environments, and recommended tooling.

@@ -1,0 +1,18 @@
+---
+title: "Lab Meetings"
+description: "When we meet, who presents, and how to prepare."
+---
+
+*Stub — fill in with the current schedule and format.*
+
+## Schedule
+
+Day, time, and location/link.
+
+## Format
+
+Rotation order, how long presentations run, journal club vs. research updates.
+
+## Presenting
+
+Where slides live, what to cover, tips for first-time presenters.

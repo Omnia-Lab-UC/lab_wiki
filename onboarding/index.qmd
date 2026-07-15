@@ -1,0 +1,13 @@
+---
+title: "Onboarding"
+description: "Everything a new lab member needs in their first weeks."
+listing:
+  contents: .
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+Start here if you're new to the lab. The pages below cover accounts to set up, tools to install, and what to expect.

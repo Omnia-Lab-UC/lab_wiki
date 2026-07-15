@@ -1,0 +1,11 @@
+/* Omnia Lab wiki custom styles */
+
+/* Slightly tighter listing tables */
+.quarto-listing-table td {
+  vertical-align: top;
+}
+
+/* Keep sidebar section titles readable */
+.sidebar-item .sidebar-item-container .menu-text {
+  overflow-wrap: break-word;
+}

@@ -1,0 +1,18 @@
+---
+title: "Getting Access"
+description: "How to get accounts on the lab's servers and HPC."
+---
+
+*Stub — fill in with actual servers and request procedures.*
+
+## Lab servers
+
+Who to ask, how accounts are created, SSH key setup.
+
+## HPC / cluster
+
+Account request process, login node address, storage quotas.
+
+## Recommended setup
+
+SSH config snippets, VPN requirements if any.

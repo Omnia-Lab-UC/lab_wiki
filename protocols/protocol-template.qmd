@@ -1,0 +1,30 @@
+---
+title: "Protocol Template"
+description: "Copy this structure when writing a new protocol."
+---
+
+Copy this page's structure when adding a protocol. A good protocol can be followed without asking the author.
+
+## Overview
+
+One paragraph: what this protocol produces and when to use it.
+
+## Materials / Requirements
+
+- Reagents, kits, software, or accounts needed
+- Approximate time required
+
+## Steps
+
+1. Numbered, unambiguous steps.
+2. Note critical steps and common failure points inline.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| ... | ... | ... |
+
+## References
+
+Link the source paper, kit manual, or original protocol if adapted.

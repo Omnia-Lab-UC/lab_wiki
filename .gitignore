@@ -1,0 +1,16 @@
+# Quarto build outputs
+/_site/
+/.quarto/
+
+# R / Python environment artifacts
+.Rproj.user/
+.Rhistory
+.RData
+__pycache__/
+.venv/
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+
+**/*.quarto_ipynb

@@ -1,0 +1,49 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Omnia Lab Wiki"
+  site-url: https://omnia-lab-uc.github.io/lab_wiki/
+  repo-url: https://github.com/Omnia-Lab-UC/lab_wiki
+  repo-actions: [edit, issue]
+  page-navigation: true
+  search:
+    location: sidebar
+    type: textbox
+  sidebar:
+    style: docked
+    collapse-level: 1
+    contents:
+      - index.qmd
+      - contributing.qmd
+      - section: "Onboarding"
+        href: onboarding/index.qmd
+        contents: onboarding/*.qmd
+      - section: "Protocols"
+        href: protocols/index.qmd
+        contents: protocols/*.qmd
+      - section: "Computing"
+        href: computing/index.qmd
+        contents: computing/*.qmd
+      - section: "Data"
+        href: data/index.qmd
+        contents: data/*.qmd
+      - section: "Lab Life"
+        href: lab-life/index.qmd
+        contents: lab-life/*.qmd
+  page-footer:
+    left: "Omnia Lab · UC"
+    right: "Built with [Quarto](https://quarto.org)"
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    link-external-newwindow: true
+
+execute:
+  freeze: auto

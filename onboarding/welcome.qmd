@@ -1,0 +1,22 @@
+---
+title: "Welcome & First Steps"
+description: "Checklist for your first week in the lab."
+---
+
+Welcome to the Omnia Lab! Work through this checklist in your first week.
+
+## Accounts and access
+
+- [ ] GitHub account added to the [Omnia-Lab-UC](https://github.com/Omnia-Lab-UC) organization
+- [ ] Lab Slack / communication channel
+- [ ] University credentials and building access
+- [ ] Server / HPC account (see [Computing](../computing/index.qmd))
+
+## Reading
+
+- [ ] Skim this wiki, especially [Data](../data/index.qmd) conventions
+- [ ] Ask your advisor for the current core papers to read
+
+## Expectations
+
+*To be filled in: meeting attendance, working hours, communication norms.*

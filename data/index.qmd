@@ -1,0 +1,13 @@
+---
+title: "Data"
+description: "Data management, storage, and naming conventions."
+listing:
+  contents: .
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+Where data lives, how it's named, how it's backed up, and what to do before a project ends. Follow these conventions from day one — retrofitting is painful.

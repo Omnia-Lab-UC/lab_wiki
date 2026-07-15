@@ -1,0 +1,46 @@
+---
+title: "Contributing to the Wiki"
+description: "How to add or update wiki pages."
+---
+
+## Quick start
+
+1. Clone the repo: `git clone git@github.com:Omnia-Lab-UC/lab_wiki.git`
+2. Create or edit a `.qmd` file in the right section folder (see below).
+3. Preview locally: `quarto preview`
+4. Commit and push (or open a pull request for larger changes).
+
+## Adding a page
+
+Create a Markdown file with a `.qmd` extension inside the section it belongs to:
+
+```markdown
+---
+title: "RNA Extraction Protocol"
+description: "One-line summary shown in section listings."
+---
+
+Page content in regular Markdown...
+```
+
+That's it — the sidebar and the section's index page pick up new files automatically.
+
+## Ground rules
+
+- **Filenames**: lowercase kebab-case (`rna-extraction.qmd`, not `RNA Extraction.qmd`).
+- **Frontmatter**: every page needs a `title` and a one-line `description`.
+- **One topic per page.** Split long pages rather than growing them.
+- **Never commit secrets or sensitive data.** This repo is public: no passwords, API keys, server IPs with credentials, participant data, or unpublished results.
+- **Check that it renders.** Run `quarto render` before pushing; a broken page breaks the whole site build.
+
+## Sections
+
+| Folder | Use for |
+|---|---|
+| `onboarding/` | Getting started, accounts, expectations |
+| `protocols/` | Step-by-step experimental or analysis protocols |
+| `computing/` | Servers, HPC, software, environments |
+| `data/` | Data management, storage, naming conventions |
+| `lab-life/` | Meetings, presentations, conferences, social |
+
+If a page doesn't fit anywhere, raise it in lab meeting before inventing a new section.

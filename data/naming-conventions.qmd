@@ -1,0 +1,20 @@
+---
+title: "Naming Conventions"
+description: "How to name projects, files, and samples."
+---
+
+*Stub — agree on these in lab meeting and record the decisions here.*
+
+## Projects
+
+Suggested pattern: `YYYY_short-project-name`.
+
+## Files
+
+- Lowercase, hyphens or underscores, no spaces.
+- Dates as `YYYY-MM-DD` so files sort chronologically.
+- Never encode the only copy of metadata in a filename — keep a README or sample sheet alongside.
+
+## Samples
+
+Define the sample ID scheme per project before collecting data.

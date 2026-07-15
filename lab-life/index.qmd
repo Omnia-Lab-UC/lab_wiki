@@ -1,0 +1,13 @@
+---
+title: "Lab Life"
+description: "Meetings, presentations, conferences, and lab culture."
+listing:
+  contents: .
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+Lab meetings, journal clubs, how to prepare presentations, conference travel, and everything social.
