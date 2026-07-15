@@ -12,7 +12,7 @@ website:
     location: sidebar
     type: textbox
   sidebar:
-    style: docked
+    style: floating
     collapse-level: 1
     contents:
       - index.qmd
@@ -39,8 +39,15 @@ website:
 format:
   html:
     theme:
-      light: cosmo
-      dark: darkly
+      light: [zephyr, theme.scss]
+      dark: [zephyr, theme.scss, theme-dark.scss]
+    grid:
+      body-width: 800px
+    include-in-header:
+      - text: |
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     css: styles.css
     toc: true
     link-external-newwindow: true
