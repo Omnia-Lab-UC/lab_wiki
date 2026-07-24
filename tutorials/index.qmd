@@ -1,0 +1,18 @@
+---
+title: "Tutorials"
+description: "Hands-on guides and courses for lab tools and analysis workflows."
+---
+
+Step-by-step guides for the tools and analysis workflows used in the lab. Some
+tutorials live here in the wiki; others are maintained as separate sites and
+linked below.
+
+## External courses
+
+- **[Single-cell analysis tutorials](https://omnia-lab-uc.github.io/single-cell_tutorials/)** —
+  a hands-on course for single-cell analysis in R using data from the Seattle
+  Alzheimer's Disease Brain Cell Atlas (SEA-AD). Runs from environment setup
+  through reading and inspecting `.h5ad` files. Aimed at students and anyone new
+  to single-cell work; assumes a working R/RStudio and Quarto setup. Maintained
+  in the [`single-cell_tutorials`](https://github.com/Omnia-Lab-UC/single-cell_tutorials)
+  repo.
