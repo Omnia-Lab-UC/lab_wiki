@@ -20,9 +20,8 @@ website:
       - section: "Onboarding"
         href: onboarding/index.qmd
         contents: onboarding/*.qmd
-      - section: "Tutorials"
+      - text: "Tutorials"
         href: tutorials/index.qmd
-        contents: tutorials/*.qmd
       - section: "Protocols"
         href: protocols/index.qmd
         contents: protocols/*.qmd
