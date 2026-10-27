@@ -14,16 +14,22 @@ There are no tests; a clean `quarto render` is the acceptance check.
 
 ## Structure
 
-- `_quarto.yml` — site config. Sidebar sections use globs (`onboarding/*.qmd`),
-  so new pages appear automatically; only edit this file to add a whole new section.
-- `index.qmd` — home page. `contributing.qmd` — human-facing editing guide.
-- Content lives in one folder per section: `onboarding/`, `protocols/`,
-  `computing/`, `data/`, `lab-life/`. Each has an `index.qmd` with a `listing`
-  block that auto-lists the section's pages — don't hand-maintain page lists.
+- `_quarto.yml` — site config and the source of truth for which sections exist.
+  Sidebar sections use globs (`onboarding/*.qmd`), so new pages appear
+  automatically; only edit this file to add a whole new section.
+- `index.qmd` — home page. `contributing.qmd` — human-facing editing guide;
+  its Sections table says what belongs in each folder.
+- Content lives in one folder per section. Each has an `index.qmd` with a
+  `listing` block that auto-lists the section's pages — don't hand-maintain
+  page lists.
+- Exception: `tutorials/` is a single sidebar link, not a glob, and its
+  `index.qmd` is hand-written. A new page there won't show up in the sidebar
+  or a listing; link it from `tutorials/index.qmd`.
 - `_site/` and `.quarto/` are build outputs: never edit, never commit.
 
 ## Writing pages
 
+- Write in English, even when the request or source material is in Spanish.
 - New content = one `.qmd` file in the right section folder. Don't create new
   top-level sections without being asked.
 - Filenames: lowercase kebab-case (`rna-extraction.qmd`).

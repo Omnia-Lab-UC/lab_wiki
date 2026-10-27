@@ -23,10 +23,12 @@ description: "One-line summary shown in section listings."
 Page content in regular Markdown...
 ```
 
-That's it — the sidebar and the section's index page pick up new files automatically.
+That's it — the sidebar and the section's index page pick up new files automatically
+(except in `tutorials/`, see below).
 
 ## Ground rules
 
+- **Language**: write in English.
 - **Filenames**: lowercase kebab-case (`rna-extraction.qmd`, not `RNA Extraction.qmd`).
 - **Frontmatter**: every page needs a `title` and a one-line `description`.
 - **One topic per page.** Split long pages rather than growing them.
@@ -38,9 +40,14 @@ That's it — the sidebar and the section's index page pick up new files automat
 | Folder | Use for |
 |---|---|
 | `onboarding/` | Getting started, accounts, expectations |
+| `tutorials/` | Hands-on guides and courses for lab tools and workflows |
 | `protocols/` | Step-by-step experimental or analysis protocols |
 | `computing/` | Servers, HPC, software, environments |
 | `data/` | Data management, storage, naming conventions |
 | `lab-life/` | Meetings, presentations, conferences, social |
+
+`tutorials/` works differently: it's a single page, not an auto-listed section.
+To add a tutorial (or an external course), link it from `tutorials/index.qmd`;
+otherwise the page gets built but isn't linked from the sidebar or any listing.
 
 If a page doesn't fit anywhere, raise it in lab meeting before inventing a new section.

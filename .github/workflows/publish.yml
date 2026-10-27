@@ -3,6 +3,9 @@ name: Publish wiki
 on:
   push:
     branches: [main]
+  # PRs only render the site, as a check; they never deploy
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,9 +13,10 @@ permissions:
   pages: write
   id-token: write
 
-# Never run two deploys at once; let an in-flight deploy finish
+# Never run two deploys at once; let an in-flight deploy finish.
+# Grouped by ref so PR checks don't queue behind (or displace) deploys.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -28,11 +32,13 @@ jobs:
         run: quarto render
 
       - name: Upload site artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
