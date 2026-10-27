@@ -35,11 +35,20 @@ comfortable with Foundations.
   principles for making data and code findable, accessible, interoperable, and
   reusable. A Library Carpentry lesson that is still in pre-alpha, so expect
   rough edges.
-- **[Spec-driven development with coding agents](https://www.deeplearning.ai/courses/spec-driven-development-with-coding-agents)** —
-  a DeepLearning.AI course on writing clear specs that give a coding agent the
-  context it needs to build maintainable software. Take it after Git and a
-  programming language: you need to be able to read and check the code an
-  agent writes.
+- **Spec-driven development with coding agents** — writing clear specs that
+  give a coding agent the context it needs to build maintainable software. Take
+  it after Git and Python: you need to be able to read and check the code an
+  agent writes. Read [AI Tools and Lab Data](../data/ai-tools-and-lab-data.qmd)
+  before you start.
+  1. **[DeepLearning.AI course](https://www.deeplearning.ai/courses/spec-driven-development-with-coding-agents)**
+     for the concepts.
+  2. **[scRNA-seq spec lab](https://github.com/Omnia-Lab-UC/ibm3407-scrna-spec-lab)**
+     for hands-on practice: you use Claude Code and OpenSpec to specify and
+     implement small, tested changes to a single-cell QC analysis. Written for
+     the IBM3407 graduate workshop, but you can do it on your own: follow its
+     `SETUP.md`, then `WORKSHOP.md`. It uses Claude through the lab's Claude
+     organization (ask Tomás for access); the setup guide also has a fallback
+     that runs a model on your own computer.
 
 ## Analysis
 
