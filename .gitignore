@@ -10,7 +10,8 @@ __pycache__/
 .venv/
 .ipynb_checkpoints/
 
-# OS files
+# OS / editor files
 .DS_Store
+.idea/
 
 **/*.quarto_ipynb
