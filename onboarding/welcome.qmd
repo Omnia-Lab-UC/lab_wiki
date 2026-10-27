@@ -13,10 +13,12 @@ checklist in your first week.
 - [ ] Lab [Zulip](https://omnialab.zulipchat.com/) account
 - [ ] University credentials and building access
 - [ ] Server / HPC account (see [Computing](../computing/index.qmd))
+- [ ] Seat in the lab's Claude organization, if you'll use AI tools (ask Tomás)
 
 ## Reading
 
 - [ ] Skim this wiki, especially [Data](../data/index.qmd) conventions
+- [ ] Before using AI tools for lab work, read [AI Tools and Lab Data](../data/ai-tools-and-lab-data.qmd)
 - [ ] Ask your advisor for the current core papers to read
 
 ## Expectations

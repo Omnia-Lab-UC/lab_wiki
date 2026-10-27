@@ -1,0 +1,65 @@
+---
+title: "AI Tools and Lab Data"
+description: "Which data can go into which AI tools, and what you're responsible for when you use them."
+---
+
+AI assistants and coding agents are useful in the lab, for writing and debugging
+code and for drafting text. They also send what they read to someone else's
+servers. This page sets out which data can go into which tools. If you're not
+sure which category something falls into, treat it as the most restricted one
+and ask Tomás.
+
+## Tools
+
+- **The lab's Claude organization:** Claude and Claude Code through the lab's
+  Team plan. Anthropic doesn't use conversations, files, or data from it to
+  train its models. Use this for lab work; ask Tomás for a seat.
+- **Local models:** models that run on your own computer or a lab server (for
+  example with Ollama). Nothing leaves the machine.
+- **Personal accounts:** your own ChatGPT, Claude, Gemini, Copilot, or similar.
+  What you enter may be used to train models, and it isn't covered by any lab
+  agreement.
+
+If you also have a personal Claude account, check which one you're using: in
+Claude Code, `/status` shows your organization, which should be Omnia Lab.
+
+## What can go where
+
+| Data | Lab Claude organization | Local model | Personal account |
+|---|---|---|---|
+| Public data, published papers, code in public repos | Yes | Yes | Yes |
+| Lab code in private repos, unpublished results, manuscript and grant drafts | Yes | Yes | No |
+| Controlled-access data, obtained under a data use agreement | No | Only on systems the agreement allows | No |
+| Participant or patient data | No | Only where the project's ethics approval allows | No |
+| Others' confidential work, such as manuscripts or grants you're reviewing | If the journal or funder allows it | If the journal or funder allows it | No |
+
+Data use agreements usually forbid sharing data with third parties, and an AI
+service is a third party, even through the lab's account and even though it
+doesn't train on your data.
+
+## Coding agents read your files
+
+Coding agents like Claude Code don't only see what you paste into them. They
+read files in the folder you start them in, and the output of the commands they
+run (`head data.csv`, `print(df)`) goes to the model too. So:
+
+- **Work with agents on code, not on restricted data.** Develop against public
+  or synthetic data, like the small synthetic dataset in the
+  [scRNA-seq spec lab](https://github.com/Omnia-Lab-UC/ibm3407-scrna-spec-lab),
+  then run the finished code on the real data yourself.
+- **Keep restricted data outside any folder you open an agent in.** This also
+  keeps it out of Git.
+- **Read commands before you approve them**, especially ones that open or print
+  data files.
+
+## Your responsibilities
+
+- **You own the result.** Check AI-written code and text as carefully as your
+  own: read it, run it, test it. "The AI wrote it" doesn't explain a mistake.
+- **Understand what you submit.** If you can't explain a piece of code in your
+  pull request, ask about it before submitting.
+- **Disclose AI use** where a journal, funder, or course requires it, and tell
+  your co-authors.
+- **Keep secrets out of prompts:** no passwords, API keys, or tokens.
+
+If you think restricted data went into an AI tool, tell Tomás right away.
