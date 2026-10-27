@@ -3,11 +3,44 @@ title: "Tutorials"
 description: "Hands-on guides and courses for lab tools and analysis workflows."
 ---
 
-Step-by-step guides for the tools and analysis workflows used in the lab. Some
-tutorials live here in the wiki; others are maintained as separate sites and
-linked below.
+Step-by-step guides for the tools and analysis workflows used in the lab,
+grouped into tracks. Some tutorials live here in the wiki; others are
+maintained as separate sites and linked below.
 
-## External courses
+New to the lab? Work through [Foundations](#foundations) in order, then pick up
+the other tracks as your project needs them.
+
+## Foundations
+
+Core skills every lab member needs. These are self-paced
+[Software Carpentry](https://software-carpentry.org/) lessons.
+
+1. **[The Unix Shell](https://swcarpentry.github.io/shell-novice/)** —
+   navigating files and running programs from the command line. You'll need it
+   for Git, the lab servers, and the cluster.
+2. **[Version control with Git](https://swcarpentry.github.io/git-novice/)** —
+   tracking changes to your work and sharing it on GitHub.
+3. **A programming language** — do the one your project uses; ask your mentor
+   if you're not sure.
+   - [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/)
+   - [Programming with R](https://swcarpentry.github.io/r-novice-inflammation/)
+
+## Lab workflow
+
+How we build and share research code and data. Start these once you're
+comfortable with Foundations.
+
+- **[FAIR data and software](https://librarycarpentry.github.io/lc-fair-research/)** —
+  principles for making data and code findable, accessible, interoperable, and
+  reusable. A Library Carpentry lesson that is still in pre-alpha, so expect
+  rough edges.
+- **[Spec-driven development with coding agents](https://www.deeplearning.ai/courses/spec-driven-development-with-coding-agents)** —
+  a DeepLearning.AI course on writing clear specs that give a coding agent the
+  context it needs to build maintainable software. Take it after Git and a
+  programming language: you need to be able to read and check the code an
+  agent writes.
+
+## Analysis
 
 - **[Single-cell analysis tutorials](https://omnia-lab-uc.github.io/single-cell_tutorials/)** —
   a hands-on course for single-cell analysis in R using data from the Seattle

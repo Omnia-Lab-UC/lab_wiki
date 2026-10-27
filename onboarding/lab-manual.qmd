@@ -35,14 +35,10 @@ methods is essential.
 
 ## Getting started
 
-If you want to get a head start, these resources will help you develop skills
-that will be valuable throughout your time in the lab:
-
-- [The Unix Shell](https://swcarpentry.github.io/shell-novice/)
-- [Version control with Git](https://swcarpentry.github.io/git-novice/)
-- [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/)
-- [Programming with R](https://swcarpentry.github.io/r-novice-inflammation/)
-- [FAIR data and software](https://librarycarpentry.github.io/lc-fair-research/) (Pre-alpha)
+If you want to get a head start, work through the
+[Foundations track](../tutorials/index.qmd#foundations) in Tutorials:
+self-paced lessons on the shell, Git, and Python or R that will be valuable
+throughout your time in the lab.
 
 For the concrete accounts and access to set up in your first week, see
 [Welcome & First Steps](welcome.qmd).
