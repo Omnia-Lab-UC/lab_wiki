@@ -18,8 +18,9 @@ Core skills every lab member needs. These are self-paced
 1. **[The Unix Shell](https://swcarpentry.github.io/shell-novice/)** —
    navigating files and running programs from the command line. You'll need it
    for Git, the lab servers, and the cluster.
-2. **[Version control with Git](https://swcarpentry.github.io/git-novice/)** —
-   tracking changes to your work and sharing it on GitHub.
+2. **[Git and GitHub](git-github.qmd)** — tracking changes to your work and
+   contributing to lab repos. Follows the Software Carpentry Git lesson and ends
+   with your first pull request to this wiki.
 3. **A programming language** — do the one your project uses; ask your mentor
    if you're not sure.
    - [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/)

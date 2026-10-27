@@ -1,0 +1,138 @@
+---
+title: "Git and GitHub"
+description: "Learn Git with the Software Carpentry lesson, then make your first pull request to a lab repo."
+---
+
+Git tracks changes to your files; GitHub is where the lab keeps its repositories
+and reviews each other's work. You'll learn Git from the Software Carpentry
+lesson, then use this page for the part the lesson doesn't cover: how we work
+together on GitHub. It ends with your first contribution to the lab, a pull
+request to this wiki.
+
+## Before you start
+
+- Finish [The Unix Shell](https://swcarpentry.github.io/shell-novice/) first;
+  the Git lesson is taught from the command line.
+- Have a GitHub account in the [Omnia-Lab-UC](https://github.com/Omnia-Lab-UC)
+  organization (see [Welcome & First Steps](../onboarding/welcome.qmd)). You also
+  need write access to the repo you're contributing to; if `git push` is
+  rejected, ask Tomás.
+- Install Git by following the lesson's
+  [setup instructions](https://swcarpentry.github.io/git-novice/index.html#setup).
+
+## 1. Work through the lesson
+
+Do episodes 1–9 of
+[Version Control with Git](https://swcarpentry.github.io/git-novice/). They take
+you from your first commit to collaborating and resolving conflicts. A few notes
+as you go:
+
+- **Episode 7, [Remotes in GitHub](https://swcarpentry.github.io/git-novice/07-github.html):**
+  set up the SSH key it walks you through. We clone lab repos over SSH.
+- **Episode 8, [Collaborating](https://swcarpentry.github.io/git-novice/08-collab.html):**
+  the lesson has both people push straight to `main`. That's fine for learning,
+  but in the lab we work on branches and merge through pull requests instead
+  (see below).
+- **Episodes 10–13** (open science, licensing, citation, hosting) are short and
+  worth reading, but you don't need them for your first contribution.
+- **Episode 14, [Using Git from RStudio](https://swcarpentry.github.io/git-novice/14-supplemental-rstudio.html):**
+  optional; useful if you work in R.
+
+## 2. How we use GitHub in the lab
+
+`main` is the shared version of a repo; for this wiki, it's the published site.
+Rather than committing to it directly, we make changes on a branch and merge
+them through a pull request, so someone else reviews them first:
+
+1. Create a **branch** for your change.
+2. Commit your work on the branch and push it to GitHub.
+3. Open a **pull request** (PR) asking to merge your branch into `main`.
+4. A labmate **reviews** it; you push more commits to address their comments.
+5. Once it's approved, the **reviewer merges** it.
+
+In commands:
+
+```bash
+git switch main
+git pull                        # start from the latest main
+git switch -c fix-welcome-typo  # create a branch and move to it
+# ...edit files...
+git add onboarding/welcome.qmd
+git commit -m "Fix typo in welcome page"
+git push -u origin fix-welcome-typo
+```
+
+After the push, Git prints a link to open a pull request. GitHub also shows a
+**Compare & pull request** button on the repo page.
+
+### Good pull requests
+
+- **One change per PR.** Small PRs get reviewed faster; split unrelated changes
+  into separate PRs.
+- **Branch names** describe the change: `fix-welcome-typo`, `add-hpc-page`.
+- **Title:** a short imperative summary, like a commit message:
+  `Add HPC access page`.
+- **Description:** what you changed and why, and anything the reviewer should
+  look at closely.
+- **Reviewer:** request your mentor from the *Reviewers* box on the PR page,
+  unless you've agreed on someone else.
+- **Feedback:** commit to the same branch and push; the PR updates itself. Reply
+  to each comment so the reviewer knows it's been handled.
+- **Checks:** some repos run automatic checks on every PR (this wiki rebuilds
+  the whole site). If a check fails, click *Details* to see why, fix it on your
+  branch, and push again.
+
+### What never goes in a repo
+
+Many lab repos are public, and anything you commit stays in the history even
+after you delete the file. Never commit:
+
+- passwords, API keys, tokens, or SSH keys;
+- participant or patient data, or any data you don't have permission to share;
+- unpublished results to a public repo;
+- large data files. Keep data out of Git and list it in `.gitignore`
+  (episode 6).
+
+If you commit something sensitive by accident, tell your mentor right away.
+Deleting it in a new commit isn't enough.
+
+## 3. Your first pull request
+
+Your first contribution is an improvement to this wiki.
+
+1. **Pick a change.** Something you noticed while getting started: a typo, a
+   broken or outdated link, a step that confused you, or a question you had to
+   ask someone that the wiki should have answered. Pages marked *Stub* are fair
+   game if you know the answer. Keep it small; if nothing comes to mind, ask
+   your mentor.
+2. **Clone the wiki** (only once):
+
+   ```bash
+   git clone git@github.com:Omnia-Lab-UC/lab_wiki.git
+   cd lab_wiki
+   ```
+
+3. **Create a branch and make your edit**, following the
+   [contributing guide](../contributing.qmd).
+4. **Preview it** with `quarto preview` if you have
+   [Quarto](https://quarto.org/docs/get-started/) installed. Either way, the PR
+   check rebuilds the site and fails if your change breaks it.
+5. **Commit, push, and open a pull request**, and request your mentor as
+   reviewer.
+6. **Respond to the review** until it's approved and merged. Your change goes
+   live on the wiki a few minutes after the merge.
+7. **Clean up** your local copy:
+
+   ```bash
+   git switch main
+   git pull
+   git branch -d fix-welcome-typo
+   ```
+
+## Going further
+
+- [Happy Git and GitHub for the useR](https://happygitwithr.com/): Git and
+  GitHub from an R user's perspective, including RStudio setup and how to get
+  unstuck.
+- [About pull requests](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests):
+  GitHub's documentation on pull requests and reviews.

@@ -10,6 +10,9 @@ description: "How to add or update wiki pages."
 3. Preview locally: `quarto preview`
 4. Commit and push (or open a pull request for larger changes).
 
+New to Git? Follow [Git and GitHub](tutorials/git-github.qmd), and use pull
+requests for your first contributions.
+
 ## Adding a page
 
 Create a Markdown file with a `.qmd` extension inside the section it belongs to:
