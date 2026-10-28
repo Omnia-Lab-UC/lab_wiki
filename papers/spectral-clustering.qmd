@@ -1,0 +1,75 @@
+---
+title: "Spectral Clustering and Embedding"
+description: "Graph Laplacians, spectral embeddings, and clustering on similarity graphs."
+---
+
+Spectral methods start from a similarity graph, such as a fused patient network
+from [SNF](similarity-network-fusion.qmd). They use the eigenvectors of the
+graph's Laplacian to embed the nodes in a low-dimensional space where clusters
+are easy to separate.
+
+## von Luxburg (2007): A tutorial on spectral clustering
+
+von Luxburg U. A tutorial on spectral clustering. *Statistics and Computing*
+17(4), 395–416 (2007).
+
+- [doi:10.1007/s11222-007-9033-z](https://doi.org/10.1007/s11222-007-9033-z)
+- [Free full text on arXiv (0711.0189)](https://arxiv.org/abs/0711.0189)
+
+**Why read it.** A self-contained introduction to spectral clustering. It
+defines the common similarity graphs and graph Laplacians, gives the three
+standard algorithms, and explains why they work from three angles: graph cuts,
+random walks, and matrix perturbation theory.
+
+**Focus on.** Sections 2–4 (similarity graphs, graph Laplacians, and the
+algorithms) and Section 8 (practical details). Section 8 covers how to build the
+similarity graph and set its parameters, how to choose the number of clusters
+with the eigengap heuristic, and which Laplacian to use. These apply directly to
+SNF: its last step runs spectral clustering on the fused network, and SNFtool's
+`estimateNumberOfClustersGivenGraph()` uses the eigengap heuristic. Sections 5–7
+give the theory; read them when you need to understand why the algorithms work.
+
+## Belkin & Niyogi (2003): Laplacian eigenmaps for dimensionality reduction and data representation
+
+Belkin M, Niyogi P. Laplacian eigenmaps for dimensionality reduction and data
+representation. *Neural Computation* 15(6), 1373–1396 (2003).
+
+- [doi:10.1162/089976603321780317](https://doi.org/10.1162/089976603321780317)
+  (paywalled; use the university library)
+- Shorter conference version, free:
+  [Laplacian eigenmaps and spectral techniques for embedding and clustering (NIPS 2001)](https://proceedings.neurips.cc/paper/2001/hash/f106b7f99d2cb30c3db1c3cc0fde9ccb-Abstract.html)
+
+**Why read it.** The paper that introduced spectral embedding as a
+dimensionality reduction method. It builds a neighbourhood graph on the data,
+weights the edges with a heat kernel, and uses the eigenvectors of the graph
+Laplacian with the smallest non-zero eigenvalues as low-dimensional coordinates.
+Points that are close in the graph stay close in the embedding. This is
+essentially the representation spectral clustering computes before its k-means
+step, so the paper explains what those coordinates mean.
+
+**Focus on.** The algorithm and the first part of the justification, which shows
+why minimising the Laplacian objective keeps neighbours together. The manifold
+theory (the Laplace–Beltrami operator and heat kernels) can wait. This paper is
+the one to read when you want to plot a fused network or use spectral
+coordinates as features, not only cluster them.
+
+## Zelnik-Manor & Perona (2004): Self-tuning spectral clustering
+
+Zelnik-Manor L, Perona P. Self-tuning spectral clustering. In *Advances in
+Neural Information Processing Systems 17* (NIPS 2004), 1601–1608.
+
+- [Free full text (NeurIPS proceedings)](https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html)
+
+**Why read it.** Two fixes for problems you run into when you use spectral
+clustering on real data. First, *local scaling*: instead of one kernel width for
+all points, each point gets its own, set from the distance to its *K*-th
+nearest neighbour. This works better when clusters differ in density. Second,
+it estimates the number of clusters from the eigenvectors themselves, by finding
+the rotation that best aligns them with the coordinate axes. This also removes
+the randomly initialised k-means step.
+
+**Focus on.** Both ideas show up in SNF. SNF's similarity kernel sets the width
+for each pair of patients from their average distances to their nearest
+neighbours, a variant of local scaling. SNFtool's
+`estimateNumberOfClustersGivenGraph()` reports a rotation-cost estimate next to
+the eigengap one; this paper is where that second number comes from.

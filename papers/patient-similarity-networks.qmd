@@ -1,0 +1,35 @@
+---
+title: "Patient Similarity Networks"
+description: "Representing patients as networks of pairwise similarity, for finding subgroups and predicting outcomes."
+---
+
+Papers on the patient similarity network (PSN) approach. Each data type, or
+each feature, becomes a network whose nodes are patients and whose edge weights
+say how similar two patients are. The networks are then used to find patient
+subgroups or to predict outcomes.
+
+## Pai & Bader (2018): Patient similarity networks for precision medicine
+
+Pai S, Bader GD. Patient similarity networks for precision medicine. *Journal
+of Molecular Biology* 430(18 Pt A), 2924–2938 (2018).
+
+- [doi:10.1016/j.jmb.2018.05.037](https://doi.org/10.1016/j.jmb.2018.05.037)
+- [Free full text on PubMed Central (PMC6097926)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6097926/)
+
+**Why read it.** A short review that introduces the PSN approach and makes the
+case for it. Any data type can be turned into a network once you define a
+similarity measure, so very different data end up in the same form. A patient
+missing from one network can still be in the others. Results read as "this
+patient resembles these patients", which is close to how clinicians reason, and
+networks can be shared without sharing the raw data. It covers the two PSN
+methods available at the time: [SNF](similarity-network-fusion.qmd) for
+clustering and netDx for classification.
+
+**Focus on.** The section "Patient similarity networks as a framework for
+clinical prediction", up to and including the clustering subsection. It gives
+the arguments for PSNs and a plain-language description of SNF. Read the netDx
+subsection if your project predicts a known outcome (classification) rather than
+discovering subgroups. The closing section on challenges (scaling to large
+cohorts, tuning parameters, using prior biological knowledge) is a useful list
+of open methods problems. The introduction on clinical risk models is
+background you can skim.

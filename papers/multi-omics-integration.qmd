@@ -1,0 +1,66 @@
+---
+title: "Multi-Omics Integration"
+description: "Strategies for combining genotype, expression, methylation, and other data types measured on the same samples."
+---
+
+Papers on how to analyse several data types (genotypes, gene expression, DNA
+methylation, and so on) measured on the same samples together, rather than one
+at a time.
+
+## Ritchie et al. (2015): Methods of integrating data to uncover genotype–phenotype interactions
+
+Ritchie MD, Holzinger ER, Li R, Pendergrass SA, Kim D. Methods of integrating
+data to uncover genotype–phenotype interactions. *Nature Reviews Genetics*
+16(2), 85–97 (2015).
+
+- [doi:10.1038/nrg3868](https://doi.org/10.1038/nrg3868) (paywalled; use the
+  university library)
+
+**Why read it.** A review that sorts integration methods into two families.
+*Multi-staged* analysis works through the data types one step at a time, for
+example from SNPs to gene expression to phenotype. *Meta-dimensional* analysis
+combines all the data types in a single analysis, and comes in three forms:
+
+- **Concatenation-based:** join the feature matrices of all data types into one
+  matrix and model that.
+- **Transformation-based:** turn each data type into an intermediate form, such
+  as a graph or kernel matrix, and combine those.
+- **Model-based:** build a model for each data type separately and combine the
+  models.
+
+**Focus on.** The meta-dimensional section. [SNF](similarity-network-fusion.qmd)
+is a transformation-based method: each data type becomes a patient similarity
+network, and the networks are fused instead of the raw features. The trade-offs
+the review describes for each family are the ones you'll need when you explain
+why we chose that approach.
+
+## Rappoport & Shamir (2018): Multi-omic and multi-view clustering algorithms: review and cancer benchmark
+
+Rappoport N, Shamir R. Multi-omic and multi-view clustering algorithms: review
+and cancer benchmark. *Nucleic Acids Research* 46(20), 10546–10562 (2018).
+
+- [doi:10.1093/nar/gky889](https://doi.org/10.1093/nar/gky889)
+- [Free full text on PubMed Central (PMC6237755)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6237755/)
+- [Benchmark scripts on GitHub](https://github.com/Shamir-Lab/Multi-Omics-Cancer-Benchmark)
+
+**Why read it.** A review of clustering methods for multi-omics data, followed
+by a benchmark. The review groups methods into early integration (concatenate
+the omics and cluster the result), late integration (cluster each omic
+separately, then combine the solutions), and intermediate integration (one model
+over all omics). Intermediate methods are further split into similarity-based
+methods, which include SNF, dimension-reduction methods, and statistical models.
+The benchmark runs nine methods, SNF among them, on gene expression, DNA
+methylation, and miRNA expression for ten TCGA cancer types. It scores each
+solution on survival differences between clusters and on enrichment of clinical
+labels.
+
+Two results to keep in mind. No method beat all the others, and multi-omics
+clustering did not consistently do better than clustering a single omic. Also,
+the usual chi-squared approximation of the logrank p-value was inaccurate with
+small samples and unbalanced cluster sizes, so the authors recommend
+permutation-based p-values instead.
+
+**Focus on.** The similarity-based methods part of the review, and the Benchmark
+and Discussion sections. Read them before you choose which methods to compare
+SNF against and how to evaluate the clusters. The rest of the review is a
+reference to come back to when another method comes up.
