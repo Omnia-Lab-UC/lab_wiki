@@ -22,6 +22,9 @@ website:
         contents: onboarding/*.qmd
       - text: "Tutorials"
         href: tutorials/index.qmd
+      - section: "Papers"
+        href: papers/index.qmd
+        contents: papers/*.qmd
       - section: "Protocols"
         href: protocols/index.qmd
         contents: protocols/*.qmd

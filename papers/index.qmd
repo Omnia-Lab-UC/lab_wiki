@@ -1,0 +1,49 @@
+---
+title: "Papers"
+description: "Foundational papers for the methods we use, grouped by topic."
+listing:
+  id: paper-topics
+  contents: .
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+Reading lists for the methods we use in the lab, one page per topic. Each entry
+says why the paper matters for our work and which parts to read closely.
+
+## Topics
+
+::: {#paper-topics}
+:::
+
+## Patient similarity networks
+
+If you're starting on patient similarity networks (PSN), read in this order:
+
+1. [Patient Similarity Networks](patient-similarity-networks.qmd): Pai & Bader
+   (2018), for what PSNs are and why we use them.
+2. [Multi-Omics Integration](multi-omics-integration.qmd): Ritchie et al.
+   (2015), for the main integration strategies and where SNF fits among them.
+3. [Similarity Network Fusion](similarity-network-fusion.qmd): Wang et al.
+   (2014), the method itself.
+4. [Spectral Clustering and Embedding](spectral-clustering.qmd): von Luxburg
+   (2007), for the clustering step that runs on the fused network.
+
+Read the other papers on those pages when your work needs them: Rappoport &
+Shamir (2018) before you choose methods to compare against, Belkin & Niyogi
+(2003) and Zelnik-Manor & Perona (2004) when you tune the clustering step or
+want to plot the fused network.
+
+## Adding a paper
+
+- Add it to the topic page where it fits, or start a new topic page if none
+  does.
+- Give the full citation, a DOI link, and a link to a free full text (PubMed
+  Central, arXiv, or an author copy) when there is one. Then add a few lines on
+  why to read it and what to focus on.
+- Don't commit PDFs. This repo is public, and most publishers don't allow
+  redistribution. For paywalled papers, link the DOI and get the PDF through
+  the university library.

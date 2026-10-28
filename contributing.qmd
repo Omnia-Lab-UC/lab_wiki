@@ -44,6 +44,7 @@ That's it — the sidebar and the section's index page pick up new files automat
 |---|---|
 | `onboarding/` | Getting started, accounts, expectations |
 | `tutorials/` | Hands-on guides and courses for lab tools and workflows |
+| `papers/` | Reading lists of foundational papers, one page per topic |
 | `protocols/` | Step-by-step experimental or analysis protocols |
 | `computing/` | Servers, HPC, software, environments |
 | `data/` | Data management, storage, naming conventions |

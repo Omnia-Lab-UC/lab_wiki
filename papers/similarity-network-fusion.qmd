@@ -1,0 +1,48 @@
+---
+title: "Similarity Network Fusion"
+description: "Building one patient similarity network from several data types with SNF."
+---
+
+Papers on similarity network fusion (SNF), which combines several data types by
+building a patient similarity network for each one and fusing the networks.
+
+## Wang et al. (2014): Similarity network fusion for aggregating data types on a genomic scale
+
+Wang B, Mezlini AM, Demir F, Fiume M, Tu Z, Brudno M, Haibe-Kains B,
+Goldenberg A. Similarity network fusion for aggregating data types on a genomic
+scale. *Nature Methods* 11(3), 333–337 (2014).
+
+- [doi:10.1038/nmeth.2810](https://doi.org/10.1038/nmeth.2810) (paywalled; use
+  the university library)
+
+**Why read it.** The paper that introduces SNF. For each data type it builds a
+network whose nodes are patients and whose edge weights say how similar two
+patients are in that data type. It then updates each network using the others,
+over several iterations: edges that are strong in one or more networks spread
+to the rest, and weak edges fade, which removes noise. The networks converge to
+a single fused network. The authors fused mRNA expression, DNA methylation, and
+miRNA expression for five TCGA cancer cohorts, then clustered the fused network
+to find subtypes with different survival.
+
+**Focus on.** The Online Methods, and the Supplementary Note if you need the
+full derivation. Work out how the similarity matrix is built from pairwise
+distances with a scaled exponential kernel, how the sparse k-nearest-neighbour
+matrix differs from the full one, and how the update rule uses both. Each of
+these steps has a hyperparameter you'll have to set:
+
+| Hyperparameter | What it controls | Usual range |
+|---|---|---|
+| *K* | Number of nearest neighbours in the sparse network | 10–30 |
+| μ (`alpha` or `sigma` in SNFtool, `mu` in snfpy) | Width of the similarity kernel | 0.3–0.8 |
+| *T* | Number of fusion iterations | 10–20 |
+
+The ranges are the ones given in the SNFtool documentation. The fused network
+is then clustered with spectral clustering; see
+[Spectral Clustering and Embedding](spectral-clustering.qmd).
+
+**Implementations.**
+
+- [SNFtool](https://CRAN.R-project.org/package=SNFtool) (R), from the authors'
+  lab. It includes `spectralClustering()` and
+  `estimateNumberOfClustersGivenGraph()`.
+- [snfpy](https://github.com/rmarkello/snfpy) (Python).

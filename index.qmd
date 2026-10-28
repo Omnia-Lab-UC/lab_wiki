@@ -11,6 +11,7 @@ Welcome to the Omnia Lab wiki. This is the lab's shared knowledge base — if yo
 |---|---|
 | [Onboarding](onboarding/index.qmd) | New member checklist, accounts, expectations |
 | [Tutorials](tutorials/index.qmd) | Hands-on guides and analysis courses |
+| [Papers](papers/index.qmd) | Foundational papers for our methods, by topic |
 | [Protocols](protocols/index.qmd) | Experimental and analysis protocols |
 | [Computing](computing/index.qmd) | Servers, HPC, software environments |
 | [Data](data/index.qmd) | Data management, storage, naming conventions |
