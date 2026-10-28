@@ -15,6 +15,8 @@ of Molecular Biology* 430(18 Pt A), 2924–2938 (2018).
 
 - [doi:10.1016/j.jmb.2018.05.037](https://doi.org/10.1016/j.jmb.2018.05.037)
 - [Free full text on PubMed Central (PMC6097926)](https://pmc.ncbi.nlm.nih.gov/articles/PMC6097926/)
+- [PDF in lab-papers](https://github.com/Omnia-Lab-UC/lab-papers/blob/main/pai-2018-patient-similarity-networks.pdf)
+  (lab members only)
 
 **Why read it.** A short review that introduces the PSN approach and makes the
 case for it. Any data type can be turned into a network once you define a
@@ -33,3 +35,41 @@ discovering subgroups. The closing section on challenges (scaling to large
 cohorts, tuning parameters, using prior biological knowledge) is a useful list
 of open methods problems. The introduction on clinical risk models is
 background you can skim.
+
+## Gliozzo et al. (2022): Heterogeneous data integration methods for patient similarity networks
+
+Gliozzo J, Mesiti M, Notaro M, Petrini A, Patak A, Puertas-Gallardo A,
+Paccanaro A, Valentini G, Casiraghi E. Heterogeneous data integration methods
+for patient similarity networks. *Briefings in Bioinformatics* 23(4), bbac207
+(2022).
+
+- [doi:10.1093/bib/bbac207](https://doi.org/10.1093/bib/bbac207)
+- [Free full text on PubMed Central (PMC9294435)](https://pmc.ncbi.nlm.nih.gov/articles/PMC9294435/)
+- [PDF in lab-papers](https://github.com/Omnia-Lab-UC/lab-papers/blob/main/gliozzo-2022-psn-data-integration-methods.pdf)
+  (lab members only)
+
+**Why read it.** A broader and more recent survey than Pai & Bader. It covers
+both steps of the work: building a PSN from one data type, including which
+similarity measure suits which kind of data, and integrating several data
+types. It sorts integration methods into three groups:
+
+- **PSN-fusion:** build one PSN per data type, then fuse them into a single
+  network. SNF and its variants are here, along with multiple kernel learning
+  methods and netDx.
+- **Input data-fusion:** combine the data types into one dataset first, for
+  example with PCA-, CCA- or matrix factorisation-based methods such as MOFA+,
+  then build a single PSN.
+- **Output-fusion:** analyse one PSN per data type separately, then combine the
+  results.
+
+**Focus on.** The "PSN construction" section and Tables 1–2, which list the
+similarity measures used for each data type. For continuous data the authors
+suggest the scaled exponential kernel of Euclidean distance, which is what SNF
+uses; for categorical data, chi-squared distances; for mixed clinical data, one
+option is to compute a similarity per variable and average them. Then read
+"SNF-based methods" and Table 4, which list SNF variants such as ANF (designed
+to be cheaper to compute than SNF) with whether code is available and in which
+language. The Discussion covers open problems: missing data, scaling to large
+cohorts, and the lack of common benchmarks for comparing methods. The input
+data-fusion and output-fusion sections are a reference for when you compare SNF
+against other approaches.

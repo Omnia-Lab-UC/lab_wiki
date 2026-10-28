@@ -12,8 +12,9 @@ Wang B, Mezlini AM, Demir F, Fiume M, Tu Z, Brudno M, Haibe-Kains B,
 Goldenberg A. Similarity network fusion for aggregating data types on a genomic
 scale. *Nature Methods* 11(3), 333–337 (2014).
 
-- [doi:10.1038/nmeth.2810](https://doi.org/10.1038/nmeth.2810) (paywalled; use
-  the university library)
+- [doi:10.1038/nmeth.2810](https://doi.org/10.1038/nmeth.2810) (paywalled)
+- [PDF in lab-papers](https://github.com/Omnia-Lab-UC/lab-papers/blob/main/wang-2014-similarity-network-fusion.pdf)
+  (lab members only)
 
 **Why read it.** The paper that introduces SNF. For each data type it builds a
 network whose nodes are patients and whose edge weights say how similar two

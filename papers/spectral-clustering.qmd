@@ -15,6 +15,8 @@ von Luxburg U. A tutorial on spectral clustering. *Statistics and Computing*
 
 - [doi:10.1007/s11222-007-9033-z](https://doi.org/10.1007/s11222-007-9033-z)
 - [Free full text on arXiv (0711.0189)](https://arxiv.org/abs/0711.0189)
+- [PDF in lab-papers](https://github.com/Omnia-Lab-UC/lab-papers/blob/main/von-luxburg-2007-spectral-clustering-tutorial.pdf)
+  (lab members only)
 
 **Why read it.** A self-contained introduction to spectral clustering. It
 defines the common similarity graphs and graph Laplacians, gives the three
@@ -26,8 +28,13 @@ algorithms) and Section 8 (practical details). Section 8 covers how to build the
 similarity graph and set its parameters, how to choose the number of clusters
 with the eigengap heuristic, and which Laplacian to use. These apply directly to
 SNF: its last step runs spectral clustering on the fused network, and SNFtool's
-`estimateNumberOfClustersGivenGraph()` uses the eigengap heuristic. Sections 5–7
-give the theory; read them when you need to understand why the algorithms work.
+`estimateNumberOfClustersGivenGraph()` uses the eigengap heuristic. Of the three
+algorithms in Section 4, pay most attention to the one by Ng, Jordan, and Weiss.
+It's the default in SNFtool's `spectralClustering()`, which takes the
+eigenvectors of the symmetric normalised Laplacian *L*~sym~ and normalises each
+row, as that algorithm does. It then assigns clusters with a rotation-based
+discretisation step instead of k-means. Sections 5–7 give the theory; read them
+when you need to understand why the algorithms work.
 
 ## Belkin & Niyogi (2003): Laplacian eigenmaps for dimensionality reduction and data representation
 
@@ -59,6 +66,8 @@ Zelnik-Manor L, Perona P. Self-tuning spectral clustering. In *Advances in
 Neural Information Processing Systems 17* (NIPS 2004), 1601–1608.
 
 - [Free full text (NeurIPS proceedings)](https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html)
+- [PDF in lab-papers](https://github.com/Omnia-Lab-UC/lab-papers/blob/main/zelnik-manor-2004-self-tuning-spectral-clustering.pdf)
+  (lab members only)
 
 **Why read it.** Two fixes for problems you run into when you use spectral
 clustering on real data. First, *local scaling*: instead of one kernel width for

@@ -32,8 +32,9 @@ If you're starting on patient similarity networks (PSN), read in this order:
 4. [Spectral Clustering and Embedding](spectral-clustering.qmd): von Luxburg
    (2007), for the clustering step that runs on the fused network.
 
-Read the other papers on those pages when your work needs them: Rappoport &
-Shamir (2018) before you choose methods to compare against, Belkin & Niyogi
+Read the other papers on those pages when your work needs them: Gliozzo et
+al. (2022) when you choose similarity measures or look at alternatives to SNF,
+Rappoport & Shamir (2018) before you choose methods to compare against, Belkin & Niyogi
 (2003) and Zelnik-Manor & Perona (2004) when you tune the clustering step or
 want to plot the fused network.
 
@@ -44,6 +45,8 @@ want to plot the fused network.
 - Give the full citation, a DOI link, and a link to a free full text (PubMed
   Central, arXiv, or an author copy) when there is one. Then add a few lines on
   why to read it and what to focus on.
-- Don't commit PDFs. This repo is public, and most publishers don't allow
-  redistribution. For paywalled papers, link the DOI and get the PDF through
-  the university library.
+- Don't commit PDFs to this repo. It's public, and most publishers don't
+  allow redistribution. Put the PDF in the private
+  [lab-papers](https://github.com/Omnia-Lab-UC/lab-papers) repo instead, and
+  link to it from the entry, marked as lab members only. If nobody in the lab
+  has the PDF, link the DOI and get it through the university library.

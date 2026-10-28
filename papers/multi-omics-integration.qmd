@@ -13,8 +13,9 @@ Ritchie MD, Holzinger ER, Li R, Pendergrass SA, Kim D. Methods of integrating
 data to uncover genotype–phenotype interactions. *Nature Reviews Genetics*
 16(2), 85–97 (2015).
 
-- [doi:10.1038/nrg3868](https://doi.org/10.1038/nrg3868) (paywalled; use the
-  university library)
+- [doi:10.1038/nrg3868](https://doi.org/10.1038/nrg3868) (paywalled)
+- [PDF in lab-papers](https://github.com/Omnia-Lab-UC/lab-papers/blob/main/ritchie-2015-integrating-data-genotype-phenotype.pdf)
+  (lab members only)
 
 **Why read it.** A review that sorts integration methods into two families.
 *Multi-staged* analysis works through the data types one step at a time, for
