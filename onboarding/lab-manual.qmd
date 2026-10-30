@@ -146,9 +146,10 @@ use WhatsApp for lab matters.
 
 ### Weekly updates
 
-Lab members submit weekly updates via [Microsoft Forms](https://forms.office.com/r/YyJjzYfytk)
-every Friday.
-These should take no more than 10 minutes to complete and should include:
+Lab members share weekly updates during our weekly lab meeting.
+If you can't attend a meeting, submit your update via
+[Microsoft Forms](https://forms.office.com/r/YyJjzYfytk) instead.
+Updates should take no more than 10 minutes to prepare and should include:
 
 - A brief bullet-point summary of tasks completed that week.
 - Plans for the upcoming week.
