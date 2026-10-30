@@ -1,0 +1,78 @@
+---
+title: "NHANES"
+description: "National Health and Nutrition Examination Survey: US population health survey with interviews, exams, and lab tests. Open access."
+---
+
+The National Health and Nutrition Examination Survey (NHANES) is run by the
+CDC's National Center for Health Statistics (NCHS). It combines interviews,
+physical examinations, and laboratory tests on a sample designed to represent
+the US civilian noninstitutionalized population. It has run continuously since
+1999, and data are released in two-year cycles.
+
+- **Website and data:** [wwwn.cdc.gov/nchs/nhanes](https://wwwn.cdc.gov/nchs/nhanes/default.aspx)
+- **Tutorials:** [NHANES tutorials](https://wwwn.cdc.gov/nchs/nhanes/tutorials/default.aspx)
+- **Access:** open. Public-use files need no application.
+
+::: {.callout-tip}
+## Ask Tomás before you download
+The lab collaborates on easier ways to access and download NHANES data. Ask
+Tomás about them before you write your own download scripts.
+:::
+
+## How the data are organized
+
+- Each cycle is split into components (demographics, dietary, examination,
+  laboratory, questionnaire), and each component into many data files.
+- Public files are SAS transport (`.xpt`) files. Read them with
+  `pandas.read_sas(path, format="xport")` in Python or `haven::read_xpt()` in
+  R.
+- Merge files within a cycle on `SEQN`, the respondent sequence number. Some
+  files have more than one row per participant, so check before you merge.
+- Fieldwork stopped in March 2020 because of COVID-19. The 2019–March 2020
+  data were combined with 2017–2018 into the 2017–March 2020 pre-pandemic
+  files; use those rather than 2019–2020 on its own. The next cycle is August
+  2021–August 2023.
+
+## Use the survey design
+
+NHANES isn't a simple random sample: some groups are oversampled, and
+participants are selected in stages. Unweighted estimates don't represent the
+US population, and ignoring the design makes standard errors too small. NCHS
+recommends using the sample weights and design variables in all analyses. The
+[tutorials](https://wwwn.cdc.gov/nchs/nhanes/tutorials/default.aspx) explain
+this in detail; read them before your first analysis.
+
+- **Weights** are in the demographics file: `WTINT2YR` for interview data,
+  `WTMEC2YR` for anything measured at the mobile examination center (MEC).
+  Some lab tests are run on subsamples with their own weights. Use the weight
+  for the smallest subsample your variables come from.
+- **Design variables:** `SDMVSTRA` (pseudo-stratum) and `SDMVPSU`
+  (pseudo-PSU).
+- **Pooling cycles:** NCHS recommends combining cycles into four years or more
+  when possible. Divide the two-year weights by the number of cycles you pool;
+  for two cycles, `WTMEC4YR = WTMEC2YR / 2`. The tutorials cover the
+  exceptions.
+- **Subgroups:** define the design on the full sample, then subset the design
+  object. Dropping rows first gives wrong standard errors.
+
+In R, with the `survey` package:
+
+```r
+library(survey)
+
+des <- svydesign(
+  ids = ~SDMVPSU, strata = ~SDMVSTRA, weights = ~WTMEC2YR,
+  nest = TRUE, data = nhanes
+)
+adults <- subset(des, RIDAGEYR >= 20)
+svymean(~BMXBMI, adults, na.rm = TRUE)
+```
+
+## Beyond the public files
+
+- **Restricted-use data**, such as detailed geography, are only available
+  through the NCHS [Research Data Center](https://www.cdc.gov/rdc/).
+- **Mortality follow-up:** NCHS publishes
+  [linked mortality files](https://www.cdc.gov/nchs/linked-data/mortality-files/)
+  for NHANES participants. The public-use versions alter some values to
+  protect participants' identities.

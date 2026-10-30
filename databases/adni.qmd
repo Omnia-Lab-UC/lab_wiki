@@ -1,0 +1,71 @@
+---
+title: "ADNI"
+description: "Alzheimer's Disease Neuroimaging Initiative: longitudinal imaging, biomarker, genetic, and cognitive data. Controlled access."
+---
+
+The Alzheimer's Disease Neuroimaging Initiative (ADNI) follows older adults
+across North America who are cognitively normal, have mild cognitive
+impairment, or have Alzheimer's dementia. Participants return for repeated
+visits, so most measures are available over time.
+
+- **Website:** [adni.loni.usc.edu](https://adni.loni.usc.edu/)
+- **Data:** the [LONI Image and Data Archive (IDA)](https://ida.loni.usc.edu/login.jsp)
+- **Access:** controlled. Tomás adds lab members.
+
+## What's in it
+
+ADNI has run in five phases: ADNI1, ADNI-GO, ADNI2, ADNI3, and ADNI4. The data
+include:
+
+- Clinical assessments, cognitive tests, and questionnaires
+- MRI and PET (amyloid, tau, FDG) images, plus processed numerical datasets
+- Biofluid biomarkers from CSF and blood
+- Genetics and other omics
+- Neuropathology, for participants who came to autopsy
+
+The most complete genomic and other omics data are distributed through
+NIAGADS and NACC rather than the IDA; see the
+[ADNI Data page](https://adni.loni.usc.edu/data-samples/adni-data/).
+
+The [ADNI FAQ](https://adni.loni.usc.edu/help-faqs/faqs/) describes
+ADNIMERGE as key ADNI tables merged into one table, available on the Study
+Data page. It lists ADNI1, GO, 2, and 3, so check whether it includes ADNI4
+before you rely on it for ADNI4 data.
+
+### ADNI4
+
+ADNI4, the current phase, began enrolling in 2023. It aims to make ADNI more
+representative of the North American population, and it adds:
+
+- Assessments of social determinants of health
+- Both amyloid and tau PET for every participant
+- Expanded plasma biomarker data, new genetic data, and new MRI sequences
+- Digital neuropathology: digitized slides of specific brain regions
+- Remote cohorts: people screened from home with online questionnaires and
+  cognitive tests (Remote Digital Cohort) or blood biomarkers (Remote Blood
+  Cohort). Their data are also shared through the IDA.
+
+See the [ADNI4 page](https://adni.loni.usc.edu/about/adni4/) for details.
+
+## Getting access
+
+Tomás has ADNI access and can add students and researchers. **If you need
+ADNI data and Tomás hasn't added you yet, contact Tomás.**
+
+## Publishing with ADNI data
+
+According to the [ADNI FAQ](https://adni.loni.usc.edu/help-faqs/faqs/), every
+manuscript that uses ADNI data must:
+
+- Be sent to the ADNI Data Sharing and Publications Committee (DPC) before you
+  submit it to a journal. The review checks that ADNI is cited correctly and
+  can take up to two weeks, so plan for it.
+- Include ADNI in the author line.
+- Use ADNI's required wording in the methods and acknowledgments.
+
+Take the wording from ADNI's
+[manuscript citation guidelines](https://adni.loni.usc.edu/wp-content/themes/adni_2023/documents/ADNI_Manuscript_Citations.pdf)
+and see the
+[Data Sharing and Publication Policy](https://adni.loni.usc.edu/wp-content/themes/adni_2023/documents/ADNI_DSP_Policy.pdf)
+for the full rules. Don't copy it from an older paper, which may use outdated
+wording.

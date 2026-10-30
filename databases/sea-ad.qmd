@@ -1,0 +1,64 @@
+---
+title: "SEA-AD"
+description: "Seattle Alzheimer's Disease Brain Cell Atlas: single-cell, spatial, and neuropathology data from human brain. Open access."
+---
+
+The Seattle Alzheimer's Disease Brain Cell Atlas (SEA-AD) profiles postmortem
+human brain from donors across the full range of Alzheimer's disease
+neuropathology. It's led by the Allen Institute, with donors from the
+University of Washington Alzheimer's Disease Research Center and the Adult
+Changes in Thought (ACT) study at Kaiser Permanente Washington Health Research
+Institute.
+
+- **Website:** [brain-map.org/consortia/sea-ad](https://brain-map.org/consortia/sea-ad)
+- **Data and downloads:** [Our Data](https://brain-map.org/consortia/sea-ad/our-data),
+  and the [AWS Open Data registry](https://registry.opendata.aws/allen-sea-ad-atlas/)
+- **Access:** open for processed data. Raw sequencing reads are controlled.
+
+## What's in it
+
+- Donor metadata: demographics, APOE genotype, and neuropathology staging
+  (Braak, CERAD, Thal, and more)
+- Quantitative, image-based neuropathology
+- Single-nucleus RNA-seq, ATAC-seq, and Multiome
+- Spatial transcriptomics (MERFISH and Xenium)
+- Whole-genome sequencing and SNP arrays
+
+The first paper focused on the middle temporal gyrus; more brain regions have
+been added since. Check the data page for the current list.
+
+## Downloading
+
+Processed data are in public S3 buckets, and you don't need an AWS account to
+download them:
+
+| Bucket | Contents |
+|---|---|
+| `s3://sea-ad-single-cell-profiling` | snRNA-seq and snATAC-seq |
+| `s3://sea-ad-spatial-transcriptomics` | MERFISH and Xenium |
+| `s3://sea-ad-quantitative-neuropathology` | Quantitative neuropathology |
+
+```bash
+aws s3 ls --no-sign-request s3://sea-ad-single-cell-profiling/
+```
+
+The single-cell files are large. Check sizes before you download
+(`aws s3 ls --no-sign-request --recursive --human-readable --summarize <path>`).
+
+A few parts are not open. Raw 10x reads are controlled access on the AD
+Knowledge Portal ([syn26223298](https://www.synapse.org/Synapse:syn26223298)),
+and genomic data are distributed through
+[NIAGADS](https://dss.niagads.org/datasets/ng00174/). If your project needs
+them, talk to Tomás first.
+
+## Citing SEA-AD
+
+Cite the primary publication and the specific dataset you used. The primary
+publication is:
+
+Gabitto MI, Travaglini KJ, et al. Integrated multimodal cell atlas of
+Alzheimer's disease. *Nature Neuroscience* (2024).
+[doi:10.1038/s41593-024-01774-5](https://doi.org/10.1038/s41593-024-01774-5)
+
+See the [data page](https://brain-map.org/consortia/sea-ad/our-data) for
+dataset citations and acknowledgment details.
