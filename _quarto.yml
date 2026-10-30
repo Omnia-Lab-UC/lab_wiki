@@ -34,6 +34,9 @@ website:
       - section: "Data"
         href: data/index.qmd
         contents: data/*.qmd
+      - section: "Databases"
+        href: databases/index.qmd
+        contents: databases/*.qmd
       - section: "Lab Life"
         href: lab-life/index.qmd
         contents: lab-life/*.qmd

@@ -15,6 +15,7 @@ Welcome to the Omnia Lab wiki. This is the lab's shared knowledge base — if yo
 | [Protocols](protocols/index.qmd) | Experimental and analysis protocols |
 | [Computing](computing/index.qmd) | Servers, HPC, software environments |
 | [Data](data/index.qmd) | Data management, storage, naming conventions |
+| [Databases](databases/index.qmd) | External datasets we use (ADNI, ROSMAP, SEA-AD, NHANES) and how to get access |
 | [Lab Life](lab-life/index.qmd) | Meetings, presentations, conferences |
 
 ## Contributing

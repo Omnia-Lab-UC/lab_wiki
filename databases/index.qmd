@@ -1,0 +1,54 @@
+---
+title: "Databases"
+description: "External datasets the lab works with, and how to get access to each."
+listing:
+  id: database-pages
+  contents: .
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+External datasets we've used in lab projects over the last few years. Each
+page says what's in the dataset, how to get access, and what to watch out for
+when you analyze it or publish with it.
+
+## Datasets
+
+::: {#database-pages}
+:::
+
+## Access at a glance
+
+| Database | What it is | Access |
+|---|---|---|
+| [ADNI](adni.qmd) | Longitudinal Alzheimer's cohort: imaging, biomarkers, genetics, cognition | Controlled. Tomás adds lab members |
+| [ROSMAP](rosmap.qmd) | Two aging cohorts with brain donation: clinical, neuropathology, omics | Controlled, through Synapse. Tomás adds lab members |
+| [SEA-AD](sea-ad.qmd) | Single-cell and spatial atlas of Alzheimer's brain tissue | Open (raw sequencing reads are controlled) |
+| [NHANES](nhanes.qmd) | US national health and nutrition survey | Open. Ask Tomás about easier ways to download it |
+
+## Controlled-access data
+
+ADNI and ROSMAP are controlled access: you can only use the data under a data
+use agreement. Tomás has access to both and can add students and researchers.
+**If you need one of them and Tomás hasn't added you yet, contact Tomás.**
+
+The agreements cover named people, so getting files from a labmate who has
+access doesn't count; you need to be added yourself. While you work with the
+data:
+
+- Keep it only on systems the agreement allows, and share files only with
+  people who have been added.
+- Never commit it to a Git repository.
+- Don't put it into AI tools, including the lab's Claude organization. See
+  [AI Tools and Lab Data](../data/ai-tools-and-lab-data.qmd).
+- Follow the dataset's publication rules, listed on its page.
+
+## Adding a database
+
+- One page per dataset: what's in it, how to get access, and anything that
+  tripped you up.
+- Add a row to the table above.
+- No credentials, tokens, or account details on any page. This repo is public.

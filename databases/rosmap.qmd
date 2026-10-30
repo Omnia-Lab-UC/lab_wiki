@@ -1,0 +1,43 @@
+---
+title: "ROSMAP"
+description: "Religious Orders Study and Rush Memory and Aging Project: aging cohorts with brain donation, with clinical, neuropathology, and omics data. Controlled access through Synapse."
+---
+
+ROSMAP combines two longitudinal cohort studies run by the Rush Alzheimer's
+Disease Center (RADC) in Chicago. The Religious Orders Study (ROS) enrolls
+older Catholic nuns, priests, and brothers from across the US. The Rush Memory
+and Aging Project (MAP) enrolls older adults from the Chicago area.
+Participants enroll without dementia, have annual clinical evaluations, and
+agree to donate their brain at death. The two studies share protocols, so
+they're usually analyzed together.
+
+- **Data:** the [AD Knowledge Portal](https://adknowledgeportal.synapse.org/)
+  on Synapse. The ROSMAP study page is
+  [syn3219045](https://www.synapse.org/Synapse:syn3219045).
+- **Access:** controlled, through Synapse. Tomás adds lab members.
+
+## What's in it
+
+- Clinical and cognitive data from the annual visits
+- Neuropathology from brain autopsy
+- Omics, mostly from brain tissue: genomic, epigenomic, transcriptomic (bulk
+  and single-nucleus), proteomic, and metabolomic data
+
+## Getting access
+
+Access is given through Synapse. Tomás has ROSMAP access and can add students
+and researchers. **If you need ROSMAP data and Tomás hasn't added you yet,
+contact Tomás.** You'll need your own [Synapse](https://www.synapse.org)
+account to be added, so create one first and send Tomás your username.
+
+## Downloading
+
+You can download files from the Synapse website, or with the Synapse
+[Python client](https://python-docs.synapse.org/) (`synapseclient`) for
+anything more than a few files. Log in with a personal access token, and keep
+the token out of your code and out of Git.
+
+## Publishing with ROSMAP data
+
+The data use terms you accept on Synapse say how to cite and acknowledge the
+data. Check them before you submit a manuscript.
