@@ -28,9 +28,15 @@ Core skills every lab member needs. These are self-paced
 
 ## Lab workflow
 
-How we build and share research code and data. Start these once you're
-comfortable with Foundations.
+How we plan, build, and share research code and data. Start these once you're
+comfortable with Foundations, except the analysis plan, which you write at the
+start of any project.
 
+- **[Writing an analysis plan](analysis-plans.qmd)** — how the lab plans an
+  analysis before running it, and how to use the `analysis-plan` Claude skill,
+  which coaches you through writing the plan yourself and keeps your milestones
+  realistic. Read [AI Tools and Lab Data](../data/ai-tools-and-lab-data.qmd)
+  first.
 - **[FAIR data and software](https://librarycarpentry.github.io/lc-fair-research/)** —
   principles for making data and code findable, accessible, interoperable, and
   reusable. A Library Carpentry lesson that is still in pre-alpha, so expect

@@ -1,0 +1,297 @@
+---
+title: "Writing an Analysis Plan"
+description: "How the lab plans an analysis, and how to use the analysis-plan Claude skill to write your plan yourself and keep its milestones realistic."
+---
+
+Before you run an analysis in the lab, you write an analysis plan: what you'll
+do to the data, in what order, with which thresholds, and why. You write it
+yourself, even when the method is new to you. Writing it is how you learn the
+method, and reading it is how Tomás sees what you understand and where you're
+unsure, early enough to help. A plan someone else wrote can look finished while
+hiding exactly those gaps, and you're the one who will defend it in a meeting
+and debug the analysis later.
+
+The `analysis-plan` skill turns Claude into a coach for this. It's available to
+everyone in the lab's Claude organization. It sets up your plan as a Word
+document, asks the questions that move each section forward, gives feedback on
+what you write, and keeps your milestones and timeline realistic. It won't write
+the science for you, on purpose.
+
+Plans are working documents, not pre-registrations. They're expected to change.
+What matters is that the changes are visible and that undecided choices are
+written down instead of skipped.
+
+## Before you start
+
+- You need a seat in the lab's Claude organization (see
+  [Welcome & First Steps](../onboarding/welcome.qmd)), and you should have read
+  [AI Tools and Lab Data](../data/ai-tools-and-lab-data.qmd).
+- Have these ready. Claude asks for whatever is missing, but the more you give
+  it up front, the more useful the first version of the document is:
+  - your question, in a sentence or two;
+  - the dataset, and whether you already have access to it;
+  - your role (undergraduate, IPRE, thesis, RA) and whether you've done this
+    kind of analysis before;
+  - how many hours a week you can give the project, and which weeks you'll have
+    less time (exams, holidays);
+  - the start date and how many weeks you have;
+  - the end product: report, poster, thesis chapter, paper;
+  - which day you meet Tomás.
+
+## Starting a plan
+
+Open a conversation in the lab organization, on [claude.ai](https://claude.ai)
+or in Claude Code, and say what you want in plain words. Claude loads the skill
+on its own. For example:
+
+> I'm doing a summer IPRE with Tomás: 100 hours, starting 1 December. I want to
+> test whether the association between plasma metabolites and cognitive decline
+> differs by sex in ADNI. I have ADNI access but have never done metabolomics
+> QC. We meet on Thursdays.
+
+Claude replies with a Word document and a short message: where you need to
+write, the two or three questions to answer first, and anything it assumed.
+Keep the document in your project folder in the lab's OneDrive.
+
+- **On claude.ai** there's nothing to install.
+- **In Claude Code** you can also call the skill directly with
+  `/analysis-plan`. It builds the document with Python, so you
+  need `python-docx` (`pip install python-docx`). Start Claude Code in a folder
+  that holds only your plan: not a data folder, and not a public repository.
+
+### If Tomás gives you a starter plan
+
+For some projects, Tomás sets up the plan before you start and gives you the
+Word document. A starter plan made with the skill usually already has:
+
+- the facts Tomás has settled for the project, marked *Given by the PI*: the
+  aim, the dataset and where it lives, required covariates, a reference sample
+  size;
+- a yellow box of pointers in each section, for you to answer;
+- a first set of milestones and a timeline, with the ones that need Tomás's
+  sign-off marked.
+
+Don't start a new plan. Attach the document to a conversation and say where it
+came from, for example "Tomás gave me this starter plan for my project. Help me
+work through it." Claude then works in that document:
+
+- **The givens stay as they are.** If you think one is wrong or doesn't fit
+  your data, don't change it: add it to the open questions with your proposal,
+  and Tomás will decide.
+- **The milestones get resized to your time.** They were sized from what Tomás
+  expected. Tell Claude how many hours a week you actually have and which weeks
+  will be lighter; the change goes in the change log.
+- **Nothing gets overwritten.** Write your answers in Word or in the
+  conversation. Either way, your words go in as you wrote them, and Claude
+  doesn't rebuild the document, so neither Tomás's text nor yours is lost.
+
+If the starter plan is a Word document Tomás wrote directly rather than one made
+with the skill, tell Claude which parts Tomás wrote, so it treats them as
+settled and coaches you on the rest. If it has no milestones yet, ask Claude to add
+milestones and a timeline; they go at the end of the document.
+
+## What's in the document
+
+| Part | What it's for |
+|---|---|
+| Header | Author, PI, version, the time you have, and the end product |
+| Readiness snapshot | Each section's level (see [Is it ready?](#is-it-ready)) and what would move it up |
+| Background, Data, QC, Analysis | Your text. Each section has a yellow box of pointers: questions about *your* dataset and variables. Answer them in your own words above the box, then delete them. |
+| Planned tables and figures | Empty versions of what you'll show: the sample flow, Table 1, the main results table and figure. You choose the rows and columns. |
+| Key readings | Two to five references, each with a line on what to read it for |
+| Milestones and timeline | What you'll have to show each week, sized to your hours |
+| Open questions, decision log, change log | What's undecided, what was decided and why, and what changed in the plan |
+
+The empty tables are there because designing Table 1 before running anything
+forces the decisions that matter (which groups, which denominator, which
+comparison) while they're still cheap to change.
+
+Claude checks references with a literature tool when it has one and marks the
+rest "to verify". Read a reference before you rely on it either way.
+
+## How the coaching works
+
+You write the science: the background and hypothesis; the QC steps, their
+order, thresholds and reasons; the model and covariates; the multiple-testing
+rule; and what you'll do with each possible result. Claude writes the structure,
+the pointers, feedback on your text, and the milestone tables, which you confirm
+or correct. Facts Tomás has already fixed for the project, such as the dataset
+or a required covariate, appear marked *Given by the PI*.
+
+When you're stuck, Claude helps one step at a time and stops as soon as you can
+write:
+
+1. a question that exposes the gap ("Two replicates of the same sample disagree.
+   How would you decide whether that metabolite is still usable?");
+2. the consideration to weigh, without resolving it;
+3. where the answer lives, and what to look for there;
+4. how a comparable step is written for a different kind of study, and why, so
+   you can write the equivalent for yours.
+
+If you're still stuck after that, that's useful information, not a failure. The
+choice goes into the open questions, with your best attempt as the proposed
+answer, for Tomás to look at.
+
+Feedback is direct. If something is wrong, for example a Bonferroni correction
+that divides by the number of participants instead of the number of tests,
+Claude says so and asks the question that leads you to the fix.
+
+If you're short on time and ask Claude to just write a section, it will ask you
+for one rough sentence and react to that instead. A section honestly marked
+*Sketch*, with its open questions listed, is fine to show Tomás, and more useful
+than a polished one you didn't write.
+
+## What to ask for
+
+| When | Say something like | What you get |
+|---|---|---|
+| You're starting out | "Help me start my analysis plan for …" | The document, and the first few pointers to answer |
+| Tomás gave you a starter plan | "Tomás gave me this starter plan. Help me work through it." (attach the file) | Coaching in that document: the givens stay, and the milestones are checked against your hours (see [above](#if-tomás-gives-you-a-starter-plan)) |
+| You have a draft | "Is my plan ready to show Tomás?" (attach the file) | A level for each section, any errors stated plainly, and the three gaps that matter most. Your text isn't rewritten. |
+| Every week | "Weekly check-in on my plan" (attach the file) | Updated milestones and timeline, and a draft of your weekly update |
+| You already have a plan in Word | "Add milestones and a timeline to my plan" (attach it) | The tracking tables, added at the end of your own document |
+| You're supervising a new student | "Set up a starter plan for a student working on …" | A scaffold with your facts as givens and pointers for the student to answer |
+
+Claude doesn't remember earlier conversations, so attach the current version of
+the Word file every time. Once you've edited the file yourself, Claude only
+rewrites its tracking tables and leaves your text alone, so you can keep writing
+in Word between sessions.
+
+## Is it ready?
+
+Each section of a plan gets one of four levels, based on what's on the page, not
+on what you meant:
+
+| Level | Means |
+|---|---|
+| Missing | Nothing, or just a heading |
+| Sketch | Says what will be done in general terms, without thresholds, order, or reasons |
+| Specific | Steps, variables and thresholds are named, and someone could mostly follow it; some reasons, counts or contingencies are missing |
+| Ready | Another lab member could run the analysis from the plan without asking you anything |
+
+Most first drafts are Sketch, and that's normal. You don't need Ready to show
+the plan to Tomás. Show it once Background and Data are Specific and everything
+you don't know yet is written down as an open question with your proposed
+answer. An honest draft shown early is worth more than a polished one shown
+late.
+
+## What a finished plan has
+
+The test is whether another lab member could run the analysis from the plan
+alone. Finished plans in the lab:
+
+- name the response and predictors concretely: variables, time points, units;
+- number the steps in the order they'll be run, each one an action;
+- give every filter a threshold and say what happens at the edges, such as a
+  categorical variable with a level that's too small;
+- give every threshold and choice a reason: a citation, a stated convention, or
+  a calculation;
+- track the sample size through the filters, ending in a final N by group;
+- list the covariates by name, saying why each one is there and which ones vary
+  by time point or model;
+- write the model as an equation and name the software;
+- count the tests and compute the significance threshold;
+- say what happens next: if nothing is significant, how hits are followed up,
+  and how results are replicated or checked with a second implementation;
+- name the plots;
+- show unresolved choices, with the options, instead of skipping them;
+- say where the data and code live and how privacy is handled.
+
+The difference between a sketch and a finished step, from the lab's EWAS and
+PheWAS plans:
+
+| Sketch | Finished |
+|---|---|
+| "We will QC the exposures." | "Require n ≥ 200. Binary or categorical: at least 50 per category; a dropped categorical returns only if its levels can be combined so each has 50, the levels still make sense, and it does not become binary. Continuous: fewer than 90% zeros; log-transform if the absolute skew is above 1." |
+| "We will correct for multiple testing." | "64 phenotypes × (184 + 212) exposures = 25,344 results; SES exposures add 4,032. Prospective Bonferroni p = 0.05 / 29,376 = 1.70e-06." |
+| "We will adjust for confounders." | "Non-varying: state, ethnicity, SES level, sex. Varying, taken at the phenotype time point: BMI, cotinine, caregiver education. SES is excluded as a covariate in models where the exposure is an SES variable." |
+| "We will handle outliers." | "Identify outliers but do not remove them; report descriptive statistics with and without them to gauge their effect. Remove only physically impossible values." |
+| (nothing about what's undecided) | "Undetermined follow-up, highlighted: if one exposure is significant at several time points, put them in one model; if some lose significance, likelihood-ratio test of the full against the reduced model." |
+
+## Milestones and the timeline
+
+A milestone is something you can show: a table, a figure, a decision, code that
+runs, a document. "Read about QC" is an activity, and nobody can check an
+activity. Each milestone has a *done when* that Tomás could verify in a minute,
+an estimate in hours, a due week, and a status.
+
+Claude proposes the milestones from the steps in your own plan, and you confirm
+or correct them. They're sized from your hours:
+
+- Only about 80% of your available hours are planned. The rest is buffer, and
+  you will use it.
+- There should be something to show at every check-in, so most milestones are 4
+  to 15 hours of work.
+- The first milestone is due in week one or two, is small, and touches the real
+  data, for example N at baseline by sex and group. It brings out access and
+  setup problems while they're cheap to fix.
+- The plan itself is a milestone that Tomás signs off, and so is each decision
+  before an expensive step, such as agreeing on QC thresholds or the primary
+  model.
+- A first attempt at anything (the cluster, a new tool) takes about twice what
+  you'd guess.
+- If the work doesn't fit, the estimates stay and the scope shrinks. What to cut
+  becomes a question for Tomás, with your proposal.
+
+The timeline is drawn from the milestones: one row per milestone, one column
+per week, plus your check-ins and the hours available and planned each week.
+Claude flags weeks with more work planned than hours available, milestones that
+are too big, and long stretches with nothing to show.
+
+Claude starts from the lab's usual time budgets. Your own numbers win.
+
+| Who | Starting estimate |
+|---|---|
+| Undergraduate during the semester | 6 h/week in teaching weeks, none in exam weeks |
+| University-wide IPRE | Usually 100 hours in total. Summer round: setup and reading in December, the analysis in January, only report writing in February. Winter round: the analysis in July, finishing and writing the report in August. |
+| Engineering IPre | The course credits are the weekly hours: 10 credits is about 10 h/week |
+
+The university is closed in February, so nothing your project depends on is
+planned for then. IPRE hours and report deadlines change from round to round, so
+check the rules for yours.
+
+## Weekly check-ins
+
+Before you meet Tomás, attach your current plan and ask Claude for a check-in.
+It asks what you finished, what you can show, what took longer than expected,
+what's blocked, and how many hours you actually worked. A milestone is Done
+when its *done when* is met, so expect to be asked for the result or its
+headline numbers.
+
+If a milestone slips by a week and nothing depends on it, it moves and the
+change log records it. If a slip eats the buffer or pushes back the end product,
+Claude doesn't squeeze everything else to make it fit. It writes the options
+(cut this, or move that) as an open question for Tomás, with your proposal.
+
+The check-in ends with a draft of your weekly update, in your voice, for Zulip or
+[lab meeting](../lab-life/lab-meetings.qmd). It reports rather than spins: if
+nothing got finished, it says so.
+
+```
+Week 4 update: [project]
+Done: M3 sample-flow table (7 h, planned 7)
+To show: [file or link]
+Slipped: M4 Table 1, half done; exams took 4 of my 10 h
+Blocked: Q2 needs an answer before M5
+Next: finish M4, start M5
+Questions for Tomás: Q2 [question] (my proposal: [proposal])
+```
+
+## Open questions and decisions
+
+Every choice you haven't settled goes in the open-questions table, with what it
+blocks and your proposed answer. A question with a proposal takes Tomás a
+minute to answer; a bare question takes a meeting, and writing the proposal is
+where you do the thinking. Once a question is answered, it moves to the decision
+log with the date, the reason, and who decided. Changing the plan is expected;
+the log is there so it never changes silently.
+
+## Data and privacy
+
+The plan describes your data; it never contains it. In the conversation, counts
+and summary statistics are fine, such as N by sex and diagnosis or a
+missingness rate. Participant-level rows are not: ADNI and similar datasets are
+under data use agreements, so never paste individual records into Claude. If
+you think you did, tell Tomás right away. See
+[AI Tools and Lab Data](../data/ai-tools-and-lab-data.qmd) for what can go into
+which tool, and keep the plan in the lab's OneDrive, not in a public repository.
