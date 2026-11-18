@@ -29,6 +29,7 @@ Claude Code, `/status` shows your organization, which should be Omnia Lab.
 |---|---|---|---|
 | Public data, published papers, code in public repos | Yes | Yes | Yes |
 | Lab code in private repos, unpublished results, manuscript and grant drafts | Yes | Yes | No |
+| Aggregates from controlled-access or participant data: counts and summary statistics, with no individual-level rows | Yes | Yes | No |
 | Controlled-access data, obtained under a data use agreement | No | Only on systems the agreement allows | No |
 | Participant or patient data | No | Only where the project's ethics approval allows | No |
 | Others' confidential work, such as manuscripts or grants you're reviewing | If the journal or funder allows it | If the journal or funder allows it | No |
