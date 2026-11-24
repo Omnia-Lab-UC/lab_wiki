@@ -4,6 +4,7 @@ project:
 
 website:
   title: "Omnia Lab Wiki"
+  favicon: images/favicon.svg
   site-url: https://omnia-lab-uc.github.io/lab_wiki/
   repo-url: https://github.com/Omnia-Lab-UC/lab_wiki
   repo-actions: [edit, issue]
