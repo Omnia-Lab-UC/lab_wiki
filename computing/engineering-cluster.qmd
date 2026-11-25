@@ -1,0 +1,193 @@
+---
+title: "Engineering School HPC Cluster"
+description: "The UC School of Engineering cluster: getting an account, logging in, SSH keys, moving files, and usage rules."
+---
+
+The UC School of Engineering (Escuela de Ingeniería) runs a high-performance
+computing (HPC) cluster for teaching and research. Lab members can get an
+account through Tomás. Use it for jobs that are too big or too long for your
+laptop.
+
+- **Official page:** [dt.ing.uc.cl/recursos/cluster](https://dt.ing.uc.cl/recursos/cluster/)
+  (in Spanish, maintained by the School's Dirección de Tecnología, DT)
+- **Login address:** `cluster.ing.uc.cl`
+- **Job scheduler:** SLURM, see [Running Jobs on the Cluster](cluster-jobs.qmd)
+- **Help desk:** [7500@uc.cl](mailto:7500@uc.cl), for platform problems only
+
+This page summarizes the DT page as of November 2026. If something here
+doesn't match the DT page, trust the DT page and update this one.
+
+## What's available {#partitions}
+
+Compute nodes are grouped into partitions. You choose one when you submit a
+job.
+
+| Partition | Hardware | Priority |
+|---|---|---|
+| `full` | 1 Intel node: 32 cores, 128 GB RAM | Same for all users |
+| `512x1024` | 5 AMD EPYC nodes: 64–128 cores and 256–512 GB RAM each | Open to all; groups that paid for the nodes go first |
+| `gpus` | 2 Intel nodes with 11 NVIDIA GPUs in total (9 Quadro RTX 8000 and 1 RTX 6000 Ada, 48 GB each; 1 Quadro RTX 6000, 24 GB), 1.5–2 TB RAM per node | Open to all; groups that paid for the nodes go first |
+
+The DT page writes the AMD partition as both `512X1024` and `512x1024`. Its
+example scripts use `512x1024`. SLURM names are case-sensitive, so run
+`sinfo` on the cluster to see the exact current names and which nodes are
+free.
+
+## Getting an account {#getting-an-account}
+
+A full-time School of Engineering professor has to request each account, and
+for lab members that's Tomás. Send him:
+
+- Your full name and institutional email
+- The software you need to run (for example R, Python, MATLAB)
+- How long you need the account (the date it can be deleted)
+- Your level: undergraduate, master's, PhD, postdoc, research assistant
+- The purpose, for example "IPRE", "Master's thesis", or a Fondecyt project
+  number
+- Your department, institute, or center
+
+Tomás emails the request to the help desk, and the help desk sends you your
+username and password.
+
+DT lists each account's purpose on its public website. Keep it short and
+generic ("Master's thesis"). Don't describe unpublished results.
+
+## Logging in {#logging-in}
+
+Open a terminal: Terminal on macOS and Linux, or
+[Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701) on Windows
+(built into Windows 11). Then run:
+
+```bash
+ssh username@cluster.ing.uc.cl
+```
+
+Replace `username` with the username the help desk sent you. The first time,
+SSH asks you to confirm the server's identity: type `yes`. Nothing appears
+on screen while you type your password, which is normal. Type `exit` to log
+out.
+
+You land on the **login node**, a shared machine for editing files, submitting
+jobs, and quick tests. DT cancels heavy programs running there. Run analyses
+as jobs, and install software from an
+[interactive session](cluster-jobs.qmd#interactive) on a compute node.
+
+You don't need the UC VPN to log in over SSH from off campus. The
+[monitoring dashboards](#monitoring) are different: they only open from the
+UC network (wired or eduroam).
+
+## Logging in without a password {#ssh-keys}
+
+An SSH key saves you from typing your password every time. If you already
+made a key, for example for [GitHub](../tutorials/git-github.qmd), reuse it
+and skip `ssh-keygen`.
+
+**macOS and Linux:**
+
+```bash
+ssh-keygen -t ed25519        # press Enter to accept the default location
+ssh-copy-id -i ~/.ssh/id_ed25519.pub username@cluster.ing.uc.cl
+ssh username@cluster.ing.uc.cl   # should no longer ask for your password
+```
+
+**Windows** has no `ssh-copy-id`, so you copy the key and add it by hand. Run
+these from your home folder, where Windows Terminal opens:
+
+```powershell
+ssh-keygen -t ed25519
+scp .ssh/id_ed25519.pub username@cluster.ing.uc.cl:
+ssh username@cluster.ing.uc.cl "mkdir -p .ssh; cat id_ed25519.pub >> .ssh/authorized_keys; rm id_ed25519.pub"
+ssh username@cluster.ing.uc.cl
+```
+
+`ssh-keygen` also asks for a passphrase. DT suggests leaving it empty. A
+passphrase protects the key if someone gets your laptop, and your system's
+keychain or `ssh-agent` can remember it for you.
+
+Your private key (`id_ed25519`, without `.pub`) never leaves your computer.
+Don't share it, email it, or commit it.
+
+### A shortcut name {#ssh-config}
+
+Add this to `~/.ssh/config` on your computer (on Windows,
+`C:\Users\<you>\.ssh\config`; create the file if it doesn't exist):
+
+```
+Host uc-cluster
+    HostName cluster.ing.uc.cl
+    User username
+```
+
+After that, `ssh uc-cluster` logs you in, and `uc-cluster:` works in place of
+`username@cluster.ing.uc.cl:` in `scp` commands.
+
+## Moving files {#moving-files}
+
+Use `scp` from a terminal on **your computer**, not on the cluster. The colon
+marks the cluster side; nothing after it means your home folder.
+
+```bash
+# Upload a file or folder to your home folder on the cluster
+scp -r my-folder username@cluster.ing.uc.cl:
+
+# Upload into a folder in your cluster account
+scp -r my-folder username@cluster.ing.uc.cl:projects/
+
+# Download from the cluster into the current folder
+scp -r username@cluster.ing.uc.cl:projects/results .
+```
+
+If you prefer a graphical tool, [FileZilla](https://filezilla-project.org/)
+works: connect with SFTP to `cluster.ing.uc.cl`, port 22, with your cluster
+username. The DT page links short videos (in Spanish) for `scp` and FileZilla.
+
+## Storage {#storage}
+
+- Everything lives in your home folder. The DT page doesn't describe a
+  separate scratch space.
+- There's no hard quota, but DT asks you to stay under **100 GB**. A daily
+  check emails you when you go over.
+- Delete temporary files, and move results off the cluster when a job
+  finishes.
+- **Don't count on the cluster for backups.** Its backup disks only protect
+  against hardware failure, and DT isn't responsible for lost data. Keep code
+  in GitHub and a copy of important results somewhere else.
+
+## Rules {#rules}
+
+DT's usage policy, in short:
+
+- Use the cluster for teaching and research.
+- Share fairly. There are few hard limits, but DT stops jobs that take over
+  the cluster.
+- Run only licensed software. Unlicensed software is prohibited.
+- You're responsible for making sure your data are legal to use there. DT
+  names medical records, contact details, and personal ID numbers (RUT) as
+  examples.
+- DT staff can access every file on the cluster to give support or detect
+  illegal activity. Using the cluster means you accept this.
+
+**Ask Tomás before you copy controlled-access data (such as
+[ADNI](../databases/adni.qmd) or [ROSMAP](../databases/rosmap.qmd)) or
+participant data to the cluster.** It's a shared university system that
+other people administer. The data use agreement or ethics approval has to
+allow storing the data there. See
+[AI Tools and Lab Data](../data/ai-tools-and-lab-data.qmd) for the same
+reasoning applied to AI tools.
+
+## Monitoring dashboards {#monitoring}
+
+Both open only from the UC network.
+
+- [Ganglia](https://ganglia.ing.puc.cl/ganglia/): live CPU and memory use per
+  node
+- [Open XDMoD](https://xdmod.ing.puc.cl:8080/): usage per user and per
+  account, built from SLURM records (GPU use isn't included)
+
+## Getting help {#help}
+
+- **Can't log in, a node is down, or something is wrong with the cluster
+  itself:** email the help desk at [7500@uc.cl](mailto:7500@uc.cl) or use
+  [mesadeayuda.ing.uc.cl](https://mesadeayuda.ing.uc.cl).
+- **Your code fails or your job doesn't do what you expected:** the help desk
+  doesn't support user programs. Ask in the lab or ask Tomás.

@@ -1,0 +1,192 @@
+---
+title: "Running Jobs on the Cluster"
+description: "Submit, monitor, and cancel SLURM jobs on the Engineering School cluster, with example scripts for CPU, conda, and GPU jobs."
+---
+
+The [Engineering School cluster](engineering-cluster.qmd) uses
+[SLURM](https://slurm.schedmd.com/quickstart.html) to share its compute
+nodes. You don't run analyses directly on the login node. You write a short
+script that says what resources you need and what to run, and submit it with
+`sbatch`. SLURM queues the job and runs it on a compute node when the
+resources are free. You can log out while it runs.
+
+To log in and set up SSH keys, see
+[Engineering School HPC Cluster](engineering-cluster.qmd#logging-in).
+
+## A first job {#first-job}
+
+Save this as `submit.sh` in your home folder on the cluster:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=test             # name shown in the queue
+#SBATCH --output=test-%j.out        # output file; %j becomes the job ID
+#SBATCH --partition=full            # which partition to use
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1           # number of CPU cores
+#SBATCH --mail-type=END,FAIL        # email when the job ends or fails
+#SBATCH --mail-user=you@uc.cl
+
+python analysis.py
+```
+
+Submit it:
+
+```bash
+sbatch submit.sh
+```
+
+`sbatch` prints the job ID. Anything your program prints goes to the output
+file (here `test-<jobid>.out`), not to your terminal. Use `--mail-type=ALL`
+to also get an email when the job starts.
+
+Use a script rather than `sbatch` command-line flags. The script records what
+you asked for, so you can rerun it.
+
+## Choosing resources {#resources}
+
+- **Partition:** `full`, `512x1024`, or `gpus`. See
+  [What's available](engineering-cluster.qmd#partitions) for the hardware,
+  and run `sinfo` for the exact names and free nodes.
+- **CPUs:** more cores only help if your code runs in parallel, for example
+  Python's `multiprocessing`, R's `parallel` or `future` packages, or OpenMP
+  in C, C++, or Fortran. Set `--cpus-per-task` to the number of cores your
+  code actually uses.
+- **Detecting cores in your code:** functions like `parallel::detectCores()`
+  in R and `os.cpu_count()` in Python report every core on the node, not the
+  ones SLURM gave you. Read the `SLURM_CPUS_PER_TASK` environment variable
+  instead:
+
+  ```r
+  n_cores <- as.integer(Sys.getenv("SLURM_CPUS_PER_TASK", "1"))
+  ```
+
+  ```python
+  import os
+  n_cores = int(os.environ.get("SLURM_CPUS_PER_TASK", 1))
+  ```
+
+- **Limits:** the DT page lists no time or resource limits, but DT stops jobs
+  that take over the cluster.
+
+### Priority
+
+When jobs wait in the queue, SLURM decides which runs next from several
+factors:
+
+- **Size:** bigger requests get lower priority.
+- **Wait time:** the longer a job waits, the higher its priority.
+- **Effective use:** if your past jobs used less than they requested, your
+  priority drops. If they used what they requested, it rises.
+
+Asking for 32 cores "just in case" makes your current job wait longer and
+lowers the priority of your next ones.
+
+## Interactive sessions {#interactive}
+
+Install packages, build conda environments, compile code, and test scripts
+in an interactive session on a compute node, not on the login node:
+
+```bash
+srun --partition=full --ntasks=1 --cpus-per-task=2 --pty bash
+```
+
+Your prompt now runs on a compute node. Type `exit` when you're done to
+release the resources.
+
+The DT page tells you to use an interactive session for setup but doesn't
+give the command. The one above is standard SLURM. If it doesn't work on the
+cluster, ask the help desk and fix this page.
+
+## Python or R with conda {#conda}
+
+There's no shared Python or R setup, so you build your own environments with
+conda. The DT page recommends conda and installs it with a Miniconda
+installer in your home folder. [Miniforge](https://github.com/conda-forge/miniforge)
+is the same idea, with the free conda-forge channel as the default. Compute
+nodes have internet access, so run these from an interactive session:
+
+```bash
+wget https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh
+bash Miniforge3-Linux-x86_64.sh     # accept the defaults; let it update ~/.bashrc
+source ~/.bashrc
+
+# Then create an environment per project, for example:
+conda create -n my-env python=3.12 pandas
+conda create -n r-env r-base r-tidyverse
+```
+
+Batch jobs don't load your `~/.bashrc` on their own, so add
+`source $HOME/.bashrc` before `conda activate`:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=conda-job
+#SBATCH --output=conda-job-%j.out
+#SBATCH --partition=512x1024
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=you@uc.cl
+
+source $HOME/.bashrc
+conda activate my-env
+
+python analysis.py      # or: Rscript analysis.R
+```
+
+## GPU jobs {#gpu}
+
+Use the `gpus` partition and request GPUs with `--gres`:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=gpu-job
+#SBATCH --output=gpu-job-%j.out
+#SBATCH --partition=gpus
+#SBATCH --gres=gpu:1                # number of GPUs
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=you@uc.cl
+
+source $HOME/.bashrc
+conda activate my-gpu-env
+
+python train.py
+```
+
+A GPU only speeds things up if your code is written to use one, for example
+PyTorch or JAX with CUDA. The GPU nodes are shared, so request only what you
+use.
+
+## Checking and cancelling jobs {#monitoring}
+
+| Command | What it does |
+|---|---|
+| `squeue -u $USER` | Your jobs. In the `ST` column, `R` is running and `PD` is pending. |
+| `squeue` | Every job on the cluster |
+| `sinfo` | Partitions and the state of their nodes |
+| `scancel <jobid>` | Cancel one of your jobs |
+
+The DT page also suggests these more detailed views:
+
+```bash
+# All jobs with user, ID, partition, name, run time, state, CPUs, and node
+squeue -o "%.10u %.10i %.10P %.20j %.11M %.10T %.4C %N" -S -t
+
+# Per node: load, free memory, and CPUs (allocated/idle/other/total)
+sinfo -N -o "%.10N %.10O %.10e %.20C"
+```
+
+## Other software {#software}
+
+Run `module avail` to see software installed as modules. The DT page
+documents:
+
+- **MATLAB R2021a**, without a graphical display. Load it with
+  `module load MATLAB/R2021a`, then run a script with
+  `matlab -nodisplay -nojvm < script.m`.
+- **Gurobi 13.0.0**, with licenses on the cluster, installed through conda.
+- **OpenFOAM** 2412 and 2506, and legacy **FEniCS** 2019.
+
+See the [DT page](https://dt.ing.uc.cl/recursos/cluster/) for the
+installation steps and example scripts.
