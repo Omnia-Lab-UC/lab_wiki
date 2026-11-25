@@ -48,8 +48,11 @@ There are no tests; a clean `quarto render` is the acceptance check.
 
 - **This repo is public.** Never add credentials, API keys, internal
   hostnames/IPs paired with access details, participant/patient data, or
-  unpublished results. If asked to document something sensitive, flag it
-  instead of writing it.
+  results from data under a data use agreement or other sharing restriction
+  (ADNI, ROSMAP; see `databases/index.qmd`). Unpublished results from open
+  data (SEA-AD, NHANES) are allowed, e.g. on `projects/` pages, and must be
+  labeled exploratory. If asked to document something sensitive, or unsure
+  whether a dataset is restricted, flag it instead of writing it.
 - Don't delete or rewrite existing pages wholesale without being asked;
   wiki pages accumulate institutional knowledge that may not be obvious.
 - Run `quarto render` before committing content changes; fix any warnings

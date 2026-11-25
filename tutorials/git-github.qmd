@@ -89,7 +89,8 @@ after you delete the file. Never commit:
 
 - passwords, API keys, tokens, or SSH keys;
 - participant or patient data, or any data you don't have permission to share;
-- unpublished results to a public repo;
+- results from data under a data use agreement to a public repo. For
+  unpublished results from open data, ask your mentor first;
 - large data files. Keep data out of Git and list it in `.gitignore`
   (episode 6).
 

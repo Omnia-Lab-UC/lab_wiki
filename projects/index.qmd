@@ -1,0 +1,47 @@
+---
+title: "Projects"
+description: "Short write-ups of student projects done in the lab: the question, what was done, what came out, and what to try next."
+listing:
+  id: project-pages
+  contents: "*.qmd"
+  type: table
+  fields: [title, description]
+  sort: "title"
+  filter-ui: false
+  sort-ui: false
+---
+
+Write-ups of short projects done in the lab, mostly undergraduate research
+(IPRE) and rotations. A two-month project rarely ends in a paper, but it does
+end with a question that was asked, an analysis that was run, and a list of
+things that went wrong or are still open. Those are worth keeping, so the next
+student starts from where the last one stopped.
+
+## Projects
+
+::: {#project-pages}
+:::
+
+## How to read these pages
+
+The results here are exploratory. They come from short projects, have not been
+peer reviewed, and each page lists the reasons to be careful with them. Use
+them as a starting point for your own analysis, and check with Tomás before
+citing or building on a specific result.
+
+## Adding a project
+
+One page per project, written when the project ends. Keep it to what a new
+student needs:
+
+- **The question**, and why this cell type, region, or cohort.
+- **Data and methods**, with enough detail to rerun it: which files, which
+  packages, which thresholds, which model.
+- **What came out**, including results that were null or hard to interpret.
+- **Caveats**: what would have to be checked before trusting the result.
+- **Next steps**: what you would do with another month.
+
+Ask the student before publishing a page with their name on it. Don't include
+their IPRE report form or anything else with personal identifiers, and don't
+include results from controlled-access data (see
+[Databases](../databases/index.qmd)).

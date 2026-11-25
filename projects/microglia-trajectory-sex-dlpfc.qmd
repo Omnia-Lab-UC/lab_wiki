@@ -1,0 +1,145 @@
+---
+title: "Sex Differences Along a Microglia Trajectory in DLPFC (IPRE, Winter 2026)"
+description: "Trajectory inference from homeostatic to disease-associated microglia in SEA-AD prefrontal cortex, with tradeSeq tests for sex differences along pseudotime."
+---
+
+- **Student:** Cristóbal Herrera (IPRE, Winter 2026)
+- **Supervisor:** Tomás González Zarzar
+- **Data:** [SEA-AD](../databases/sea-ad.qmd) snRNA-seq, dorsolateral
+  prefrontal cortex (DLPFC), microglia
+- **Status:** finished as an IPRE project. Exploratory; see
+  [Caveats](#caveats) before using any of it.
+
+## The question
+
+Microglia move from a homeostatic state toward a disease-associated state
+(DAM) in Alzheimer's disease. Do they do so differently in men and women?
+
+Microglia were chosen as the brain's resident immune cells, well represented
+in the dataset, with the focus on inflammatory mechanisms. The DLPFC was
+chosen because it is among the cortical regions reported to differ most
+between sexes in Alzheimer's disease, and it accumulates amyloid early.
+
+## What was done
+
+The project extends the trajectory tutorial (03b) of the lab's
+[single-cell tutorials](https://omnia-lab-uc.github.io/single-cell_tutorials/)
+from one donor and one lineage to microglia from the whole DLPFC cohort, and
+runs the `tradeSeq` analysis that the tutorial leaves as an optional exercise.
+
+1. **Loading.** Donor files were downloaded with `aws s3 sync` from
+   `PFC/RNAseq/donors_objects` and read with `zellkonverter` and `HDF5Array`,
+   which keep the matrices on disk. Each donor was subset to microglia in a
+   loop.
+2. **Quality control.** QC metrics were computed with `scrapper`. Adaptive
+   thresholds were compared with the fixed thresholds from the tutorial and
+   kept, leaving 34,828 nuclei and discarding 5,971.
+3. **Preprocessing.** `scran` pooling normalization, 2,000 highly variable
+   genes, PCA, and UMAP.
+4. **Clustering.** For the trajectory, 1,500 highly variable genes gave
+   cleaner clusters than 2,000. PCA with 50 components, UMAP on the first 20,
+   and graph clustering on the PCA (k = 20, Louvain) gave 11 clusters.
+5. **Trajectory.** Each cluster was scored for homeostatic and DAM marker
+   genes. Cluster 3 (high homeostatic, low DAM) was set as the start and
+   cluster 11 (high DAM) as the end. `slingshot` returned six lineages;
+   lineage 1 runs from cluster 3 to cluster 11 and was taken as the trajectory
+   of interest. It leaves 12,559 nuclei outside, in clusters that are not on
+   that path.
+6. **Check against pathology.** Pseudotime along lineage 1 was compared
+   between donors grouped by Braak stage, Thal phase, and overall AD
+   neuropathological change.
+7. **Differential expression along pseudotime.** `tradeSeq::fitGAM()` on raw
+   counts for the 1,500 genes, with seven knots, sex as the condition, and
+   highest education level as a covariate. Then `associationTest()` for genes
+   that change along lineage 1 in at least one sex, and `conditionTest()` with
+   a log2 fold change threshold of 0.5 for genes whose pattern differs between
+   sexes. Both at FDR < 0.05.
+
+![UMAP of microglia with the lineage 1 curve. Orange: the start cluster
+(homeostatic). Red: the end cluster (DAM).](images/microglia-trajectory-umap.png)
+
+## What came out
+
+**The pseudotime does not follow pathology.** If lineage 1 captured disease
+progression, donors at later stages should sit further along it. They don't:
+the distributions overlap and are multimodal at every stage, for Braak, Thal,
+and overall AD change alike.
+
+![Distribution of pseudotime along lineage 1, by donor Braak stage. There is
+no ordering by stage.](images/microglia-trajectory-braak.png)
+
+**Genes along the trajectory.** 719 of the 1,500 genes change along lineage 1
+in at least one sex. Of those, 29 also differ between sexes:
+
+| Group | Genes |
+|---|---|
+| Sex-chromosome genes | *TSIX*, *NLGN4Y*, *TTTY14*, *LINC00278* (Y-linked or X-inactivation), *CYBB*, *TMSB4X* (X-linked) |
+| Microglial activation, lipid, iron, and stress response | *MS4A6A*, *PLIN2*, *FTL*, *SIGLEC1*, *MT2A*, *NUPR1*, *HSPB1*, *SERPINB9* |
+| Interferon response | *IFI44L*, *MX2* |
+| Other | *IGSF21*, *ERC2*, *ARHGAP31*, *ANKUB1*, *KCNIP4*, *PHACTR1*, *ADGRB3*, *ANKRD22*, *MALAT1*, *RPL35*, *RPS15*, *AC120193.1*, *AC011933.4* |
+
+Cristóbal singled out *MS4A6A* (modulates TREM2 signaling), *PLIN2* (a marker
+of lipid-droplet-accumulating microglia), *FTL* (iron storage), and *CYBB*
+(NADPH oxidase) as the most interpretable. *PLIN2* rises toward the end of
+the trajectory more in males.
+
+::: {layout-ncol=2}
+![Fitted expression of the 29 genes along lineage 1, female
+donors.](images/microglia-trajectory-heatmap-female.png)
+
+![The same, male donors. Rows are clustered separately in each panel, so the
+gene order differs.](images/microglia-trajectory-heatmap-male.png)
+:::
+
+His own conclusion is the right one: the gene list is only as meaningful as
+the trajectory under it, and it is unclear what this trajectory captures. The
+background on DAM as a conserved microglial state is in
+[Cheng & Ho (2025)](https://doi.org/10.1371/journal.pbio.3003426).
+
+## Caveats {#caveats}
+
+- **The trajectory is not validated.** It was built from marker genes
+  described in mouse models and does not track any of the donor-level
+  pathology measures. Genes that rise at the end of pseudotime are also
+  expressed in nuclei off the trajectory.
+- **Nuclei were treated as independent samples.** Sex is a property of the
+  donor, but `tradeSeq` fits one model across all nuclei and does not know
+  which donor each came from. Thousands of nuclei from a few dozen donors
+  make differences look far more certain than they are. This is the
+  pseudoreplication problem described in tutorial 03a, and it is the main
+  reason not to trust the 29 genes as they stand.
+- **Several hits are sex-chromosome genes**, which differ between sexes in
+  every cell type and say nothing about the trajectory.
+- **Some genes look like they come from other cells.** *ERC2*, *KCNIP4*, and
+  *ADGRB3* are neuronal genes; in microglia nuclei they are more likely
+  ambient RNA than microglial expression. Not checked.
+- **Only one covariate.** `fitGAM()` on 1,500 genes took about nine hours on
+  a laptop, so only education level was adjusted for. Age, post-mortem
+  interval, and comorbidities were planned and not run. The number of knots
+  was set to seven without running `evaluateK()`, for the same reason.
+- **Donors were not integrated.** Clusters, and so the trajectory, can
+  reflect differences between donors as well as cell states.
+- **Not reproducible yet.** Only the `tradeSeq` script was archived. The
+  loading, QC, clustering, and `slingshot` code exists only as slides.
+
+## Next steps
+
+If you pick this up:
+
+1. Decide first whether there is a trajectory worth testing. Integrate the
+   donors, rebuild it, and check it against pathology again. A pseudotime that
+   doesn't order donors by any measure of disease is not a disease axis.
+2. Compare with the microglial states SEA-AD already annotated (the
+   `Supertype` column) before defining new clusters.
+3. Make the donor the unit of analysis. For example, split pseudotime into a
+   few bins, sum counts per donor within each bin, and test sex and its
+   interaction with the bin using the pseudobulk approach from tutorial 04.
+4. Keep `tradeSeq` for exploration, on a subsample of nuclei or on the
+   cluster, where trying different covariates and `evaluateK()` is feasible.
+5. Remove the sex-chromosome genes from any list before interpreting it.
+
+## Materials
+
+The `tradeSeq` script, Cristóbal's analysis plan with his dictionary of the
+SEA-AD metadata columns, and two slide decks (preprocessing and trajectory)
+are kept by the lab. Ask Tomás for them.
