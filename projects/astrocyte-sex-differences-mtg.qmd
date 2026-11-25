@@ -1,0 +1,134 @@
+---
+title: "Sex Differences in MTG Astrocytes (IPRE, Winter 2026)"
+description: "Pseudobulk differential expression between male and female donors in SEA-AD middle temporal gyrus astrocytes, with GO enrichment."
+---
+
+- **Student:** Emilia Magni (IPRE, Winter 2026, July to August, 100 hours)
+- **Supervisor:** Tomás González Zarzar
+- **Data:** [SEA-AD](../databases/sea-ad.qmd) snRNA-seq, middle temporal gyrus
+  (MTG), 84 donors
+- **Status:** finished as an IPRE project. Exploratory; see
+  [Caveats](#caveats) before using any of it.
+
+## The question
+
+Do astrocytes from male and female donors differ in gene expression, once
+Alzheimer's pathology is taken into account?
+
+Astrocytes were chosen after a literature review of the cell types affected in
+Alzheimer's disease, and the MTG because it is one of the first cortical
+regions affected and the region SEA-AD covers best.
+
+## What was done
+
+The project follows the pseudobulk track of the lab's
+[single-cell tutorials](https://omnia-lab-uc.github.io/single-cell_tutorials/)
+(tutorials 03a and 04), scaled from one donor to the whole MTG cohort, and
+then adds an enrichment step the tutorials don't cover.
+
+1. **Loading.** Each donor's `.h5ad` file was read with `schard`, subset to
+   `Subclass == "Astrocyte"`, and given its raw UMI counts. Donors were
+   processed one at a time, with each result saved to disk, so that 84 files
+   never had to be in memory together and an interrupted run could resume.
+2. **Quality control.** Library size, genes detected, and percent
+   mitochondrial counts were computed per nucleus with `scuttle`. Outliers
+   were flagged with `perCellQCFilters()` on all astrocytes pooled, instead of
+   fixed thresholds.
+3. **Overview.** Per-donor `scran` normalization, 2,000 highly variable
+   genes, PCA, and a UMAP on 20 components. This was only used to look at the
+   data, not for the test.
+4. **Pseudobulk.** Raw counts of the nuclei that passed QC were summed per
+   donor with `aggregateAcrossCells()`, giving one astrocyte profile per
+   donor.
+5. **Differential expression.** `edgeR` quasi-likelihood model with the design
+   `~ Braak + Sex`, Braak stage coded 0 to 6 and female as the reference
+   level. After `filterByExpr()`, 20,317 genes were tested. Genes with
+   FDR < 0.05 were called significant.
+6. **Enrichment.** GO Biological Process over-representation with
+   `clusterProfiler::enrichGO()`, run separately for the male-higher and
+   female-higher genes, using the 20,317 tested genes as the background.
+
+## What came out
+
+Sixty genes passed FDR < 0.05: 39 higher in males and 21 higher in females.
+
+![Volcano plot of the male vs. female test. Positive fold change means higher
+expression in males. The points far from zero are sex-chromosome
+genes.](images/astrocyte-sex-de-volcano.png)
+
+Most of them are on the sex chromosomes:
+
+| Group | Genes |
+|---|---|
+| Y-linked, higher in males (15) | *USP9Y*, *UTY*, *DDX3Y*, *KDM5D*, *EIF1AY*, *RPS4Y1*, *ZFY*, *ZFY-AS1*, *NLGN4Y*, *PCDH11Y*, *PRKY*, *TMSB4Y*, *TTTY14*, *TTTY10*, *LINC00278* |
+| Pseudoautosomal, higher in males (4) | *CD99*, *PLCXD1*, *GTPBP6*, *ZBED1* |
+| X-linked, higher in females (13) | *XIST*, *TSIX*, *JPX*, *KDM5C*, *KDM6A*, *ZFX*, *ZFX-AS1*, *USP9X*, *PUDP*, *ZC3H12B*, *PIN4*, *EIF2S3*, *SMC1A* |
+| Annotated autosomal, higher in males | *CD24*, *TRIM5*, *IL27*, *HMOX1*, *CD74*, *HLA-DRA*, *HLA-DRB1*, *NIBAN1*, *COL9A3*, *DDX43* |
+| Annotated autosomal, higher in females | *DACH1* |
+
+The remaining 17 are lncRNAs and unnamed clone-based transcripts (for example
+*AC012078.2* or *AL353804.1*) whose location was not looked up.
+
+For enrichment, 12 of the 60 gene symbols could not be mapped by
+`org.Hs.eg.db`, and only 25 of the 39 male-higher genes had any GO Biological
+Process annotation. Among those, 114 GO terms were enriched, all related to
+immune function: antigen processing and presentation, T cell activation and
+differentiation, lymphocyte proliferation. No term was enriched among the
+female-higher genes.
+
+![Top GO Biological Process terms among genes higher in males. Each term is
+supported by three or four genes.](images/astrocyte-sex-de-go-males.png)
+
+Emilia then counted how often each gene appears across the 114 terms.
+*HLA-DRB1* is in 99 of them.
+
+## Caveats {#caveats}
+
+- **Most of the signal is the expected one.** At least 32 of the 60 genes are
+  on the X or Y chromosome or in the pseudoautosomal region. Finding them
+  shows the pipeline and the sex labels are right, which is worth knowing, but
+  it is not a finding about astrocytes or Alzheimer's disease.
+- **The immune enrichment rests on five genes.** *HLA-DRB1*, *HLA-DRA*,
+  *CD74*, *IL27*, and *CD24* carry every top term, and the 114 terms are
+  largely the same few genes counted under overlapping labels. The number of
+  enriched terms says little about how broad the signal is.
+- **Those genes may not come from astrocytes.** MHC class II genes and *CD74*
+  are typical of microglia, and here they are expressed at low levels. Ambient
+  RNA or a few mislabeled nuclei in some donors could produce the same result.
+  This was not checked.
+- ***HLA-DRB1* is a difficult gene to quantify.** It is highly polymorphic,
+  so read mapping differs between donors with different alleles, and a handful
+  of donors can drive a group difference.
+- **The model is minimal.** Only Braak stage was adjusted for. Age at death,
+  post-mortem interval, RNA quality, and the number of nuclei behind each
+  donor's profile were not.
+- **The UMAP shows donor structure.** Several clusters contain nuclei of one
+  sex only, which is what you see when clusters are single donors and the
+  donors were not integrated. This doesn't affect the pseudobulk test, but
+  don't read those clusters as astrocyte subtypes.
+
+![UMAP of MTG astrocytes colored by donor sex. The isolated single-color
+clusters are most likely individual donors.](images/astrocyte-sex-de-umap-sex.png)
+
+## Next steps
+
+If you pick this up:
+
+1. Set the sex-chromosome genes aside and look at the autosomal list on its
+   own. Then rerun the enrichment without them.
+2. Plot the *HLA-DRB1*, *HLA-DRA*, and *CD74* pseudobulk values per donor. Is
+   it a shift across males, or a few donors?
+3. Check for microglial contamination: do the donors with high MHC class II
+   expression in "astrocytes" also show other microglia markers there?
+4. Add covariates (age, post-mortem interval, number of nuclei per donor) and
+   see which genes survive.
+5. Test the question the project set out with more directly: does the effect
+   of pathology differ by sex? That is a `Braak × Sex` interaction, not the
+   main effect of sex.
+6. Repeat in the prefrontal cortex donors. A real sex difference in astrocytes
+   should show up in both regions.
+
+## Materials
+
+The scripts (`01` to `08`, one per step above), the full result tables, and
+Emilia's 45-step analysis plan are kept by the lab. Ask Tomás for them.
