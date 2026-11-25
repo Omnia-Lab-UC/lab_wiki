@@ -131,4 +131,7 @@ If you pick this up:
 ## Materials
 
 The scripts (`01` to `08`, one per step above), the full result tables, and
-Emilia's 45-step analysis plan are kept by the lab. Ask Tomás for them.
+Emilia's 45-step analysis plan are in the
+[`ipre-projects`](https://github.com/Omnia-Lab-UC/ipre-projects/tree/main/2026-winter/astrocyte-sex-differences-mtg)
+repository. Its README says how the scripts fit together and what to fix
+before running them.

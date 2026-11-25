@@ -41,6 +41,10 @@ student needs:
 - **Caveats**: what would have to be checked before trusting the result.
 - **Next steps**: what you would do with another month.
 
+Put the code, result tables, and analysis plan in the
+[`ipre-projects`](https://github.com/Omnia-Lab-UC/ipre-projects) repository,
+in a folder named like the wiki page, and link to it from a Materials section.
+
 Ask the student before publishing a page with their name on it. Don't include
 their IPRE report form or anything else with personal identifiers, and don't
 include results from controlled-access data (see

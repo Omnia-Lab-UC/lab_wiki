@@ -142,4 +142,7 @@ If you pick this up:
 
 The `tradeSeq` script, Cristóbal's analysis plan with his dictionary of the
 SEA-AD metadata columns, and two slide decks (preprocessing and trajectory)
-are kept by the lab. Ask Tomás for them.
+are in the
+[`ipre-projects`](https://github.com/Omnia-Lab-UC/ipre-projects/tree/main/2026-winter/microglia-trajectory-sex-dlpfc)
+repository. Its README lists which steps have code and which are documented
+only in the plan and slides.
